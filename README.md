@@ -14,9 +14,11 @@ Sterowanie odbywa się przy pomocy strzałek. Prawa i lewa odpowiadają kierunko
 *Dodatkowe funkcjonalności*
 
 System punktowy dla aktualnie rozgrywanej gry.
+
 Tabela wyników dla poszczególnych rozgrywek. 
 
 *Autorzy*
 
 @Damian Deska, Dominika Loska, Adam Gorazda, Anna Wójcik, 2016
+
 Zaawansowane Programowanie w języku Java 2016 - Tetris
