@@ -11,15 +11,15 @@ import java.awt.*;
 public class Frame extends JFrame {
 
     //private static final long serialVersionUID = 1L;
-    public Dimension dim;
+    public Dimension dimension;
     int x;
     int y;
 
     public Frame() throws InterruptedException {
 
-        dim = Toolkit.getDefaultToolkit().getScreenSize();
-        x = (int) dim.getWidth() * 4 / 12;
-        y = (int) dim.getHeight() * 2 / 12;
+        dimension = Toolkit.getDefaultToolkit().getScreenSize();
+        x = (int) dimension.getWidth() * 4 / 12;
+        y = (int) dimension.getHeight() * 2 / 12;
         this.setTitle("TETRIS");
         this.setSize(400, 660);
         this.setLocation(x, y);
