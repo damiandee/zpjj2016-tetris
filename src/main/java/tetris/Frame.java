@@ -23,7 +23,6 @@ public class Frame extends JFrame {
         this.setTitle("TETRIS");
         this.setSize(400, 660);
         this.setLocation(x, y);
-
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(true);
         this.setFocusable(true);
