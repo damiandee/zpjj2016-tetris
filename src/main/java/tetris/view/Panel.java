@@ -1,605 +1,304 @@
 package tetris.view;
 
-import tetris.controller.TetrisController;
+//import tetris.controller.TetrisController;
 import tetris.model.*;
+import tetris.model.factory.Block;
+import tetris.model.factory.BlockFactory;
+import tetris.model.factory.BlockType;
+import tetris.model.factory.TetrisBlockFactory;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import java.awt.event.*;
+import java.util.Random;
 
 /**
  * Created by Dominika on 2016-07-03.
  */
-public class Panel extends JPanel implements KeyListener, ActionListener {
+public class Panel extends JPanel implements  ActionListener {
 
-    private static final long serialVersionUID = 1L;
+    final int BoardWidth = 10;
+    final int BoardHeight = 22;
 
-    TetrisController tetrisController;
-    public static int spin, num = 1, yNum = 1, xNum = 1, offSet, offSet2, dropDownTo = 500;
-    public static boolean shapeEnd, reached = false, onSide = true, firstShape = false;
+    Timer timer;
+    boolean isFallingFinished = false;
+    boolean isStarted = false;
+    boolean isPaused = false;
+    int numLinesRemoved = 0;
+    int curX = 0;
+    int curY = 0;
+    JLabel statusbar;
+    Block curPiece;
+    BlockType[] board;
 
-    public int iPlus20, jPlus20;
+    BlockFactory blockFactory = new TetrisBlockFactory();
 
-    //OrangeLeftLBlock orangeLeftLBlock;
-    CyanBarBlock cyanBarBlock;
-    RedCrossBlock redCrossBlock;
-    YellowSquareBlock yellowSquareBlock;
-    GreenSBlock greenSBlock;
-    BlueSBlock blueSBlock;
+    public Panel(Frame frame) {
 
-    Timer time;
+        setFocusable(true);
+        setRandomBlock();
+        timer = new Timer(400, this);
+        timer.start();
 
-    public Panel() throws InterruptedException {
-        tetrisController = new TetrisController();
-        //orangeLeftLBlock = new OrangeLeftLBlock();
-        cyanBarBlock = new CyanBarBlock();
-        redCrossBlock = new RedCrossBlock();
-        yellowSquareBlock = new YellowSquareBlock();
-        greenSBlock = new GreenSBlock();
-        blueSBlock = new BlueSBlock();
-        spin = 0;
-        this.setSize(350, 300);
-        this.setVisible(true);
-        addKeyListener(this);
-        this.setFocusable(true);
-        this.requestFocus();
-        time = new Timer(10, this);
-        time.start();
-    }
-
-    public void paint(Graphics g) {
-        g.setColor(Color.black);
-        g.fillRect(0, 0, 350, 560);
-        for (int i = 0; i < 3750; i++) {
-            System.out.println();
-        }
-        for (int i = 1; i < 27; i++) {
-            iPlus20 = i * 20;
-            for (int j = 1; j < 15; j++) {
-                jPlus20 = j * 20;
-
-                if (tetrisController.controler[i][j] == 0) {
-                    g.setColor(Color.white);
-                }
-                if (tetrisController.controler[i][j] == 1) {
-                    g.setColor(Color.cyan);
-                }
-                if (tetrisController.controler[i][j] == 2) {
-                    g.setColor(Color.red);
-                }
-                if (tetrisController.controler[i][j] == 3) {
-                    g.setColor(Color.yellow);
-                }
-                if (tetrisController.controler[i][j] == 4) {
-                    g.setColor(Color.green);
-                }
-                if (tetrisController.controler[i][j] == 5) {
-                    g.setColor(Color.blue);
-                }
-                if (tetrisController.controler[i][j] == 100) {
-                    g.setColor(Color.white);
-                }
-                g.fillRect(jPlus20, iPlus20, 20, 20);
-            }
-        }
-
-        if (num == 1) {
-            CyanBarBlock.num = 1;
-            cyanBarBlock.paint(g);
-            Panel.shapeEnd = false;
-            tetrisController.checkRow1();
-            if (cyanBarBlock.onSide == false) {
-                tetrisController.checkCols7(xNum);
-            }
-            if (cyanBarBlock.onSide == true) {
-                tetrisController.checkCols4(xNum);
-            }
-
-            if (reached == true) {
-
-                if (cyanBarBlock.onSide == false) {
-                    tetrisController.controler[yNum - 2][xNum] = TetrisController.colr;
-                    tetrisController.controler[yNum - 1][xNum] = TetrisController.colr;
-                    tetrisController.controler[yNum][xNum] = TetrisController.colr;
-                }
-
-                if (cyanBarBlock.onSide == true) {
-                    tetrisController.controler[yNum][xNum - 2] = TetrisController.colr;
-                    tetrisController.controler[yNum][xNum - 1] = TetrisController.colr;
-                    tetrisController.controler[yNum][xNum] = TetrisController.colr;
-                }
-
-            }
-        }
-        if (num == 2) {
-            RedCrossBlock.num = 2;
-            redCrossBlock.paint(g);
-            Panel.shapeEnd = false;
-            tetrisController.checkRow1();
-            if (redCrossBlock.onSide == 1) {
-                tetrisController.checkCols2(xNum);
-            }
-            if (redCrossBlock.onSide == 2) {
-                tetrisController.checkCols4(xNum);
-            }
-            if (redCrossBlock.onSide == 3) {
-                tetrisController.checkCols6(xNum);
-            }
-            if (redCrossBlock.onSide == 4) {
-                tetrisController.checkCols3(xNum);
-            }
-            //tetrisController.controler[1][9]=TetrisController.colr;
-            if (reached == true) {
-                if (redCrossBlock.onSide == 1) {
-
-                    tetrisController.controler[yNum][xNum] = TetrisController.colr;
-                    tetrisController.controler[yNum + 1][xNum] = TetrisController.colr;
-                    tetrisController.controler[yNum + 2][xNum] = TetrisController.colr;
-                    tetrisController.controler[yNum + 1][xNum + 1] = TetrisController.colr;
-                }
-
-                if (redCrossBlock.onSide == 2) {
-                    tetrisController.controler[yNum + 1][xNum - 1] = TetrisController.colr;
-                    tetrisController.controler[yNum + 1][xNum] = TetrisController.colr;
-                    tetrisController.controler[yNum + 1][xNum - 2] = TetrisController.colr;
-                    tetrisController.controler[yNum][xNum - 1] = TetrisController.colr;
-                }
-
-                if (redCrossBlock.onSide == 3) {
-                    tetrisController.controler[yNum][xNum] = TetrisController.colr;
-                    tetrisController.controler[yNum][xNum + 1] = TetrisController.colr;
-                    tetrisController.controler[yNum][xNum - 1] = TetrisController.colr;
-                    tetrisController.controler[yNum + 1][xNum] = TetrisController.colr;
-                }
-
-                if (redCrossBlock.onSide == 4) {
-                    tetrisController.controler[yNum - 2][xNum] = TetrisController.colr;
-                    tetrisController.controler[yNum - 1][xNum] = TetrisController.colr;
-                    tetrisController.controler[yNum][xNum] = TetrisController.colr;
-                    tetrisController.controler[yNum - 1][xNum - 1] = TetrisController.colr;
-                }
-            }
-        }
-        if (num == 3) {
-            YellowSquareBlock.num = 3;
-            yellowSquareBlock.paint(g);
-            Panel.shapeEnd = false;
-            tetrisController.checkRow1();
-            tetrisController.checkCols8(xNum);
-            //tetrisController.controler[1][9]=TetrisController.colr;
-            if (reached == true) {
-                if (yellowSquareBlock.onSide == true) {
-                    tetrisController.controler[yNum][xNum - 1] = TetrisController.colr;
-                    tetrisController.controler[yNum][xNum] = TetrisController.colr;
-                    tetrisController.controler[yNum + 1][xNum - 1] = TetrisController.colr;
-                    tetrisController.controler[yNum + 1][xNum] = TetrisController.colr;
-                }
-                if (yellowSquareBlock.onSide == false) {
-                    tetrisController.controler[yNum][xNum - 1] = TetrisController.colr;
-                    tetrisController.controler[yNum][xNum] = TetrisController.colr;
-                    tetrisController.controler[yNum + 1][xNum - 1] = TetrisController.colr;
-                    tetrisController.controler[yNum + 1][xNum] = TetrisController.colr;
-                }
-            }
-        }
-        if (num == 4) {
-            GreenSBlock.num = 4;
-            greenSBlock.paint(g);
-            Panel.shapeEnd = false;
-            tetrisController.checkRow1();
-            if (greenSBlock.onSide == false) {
-                tetrisController.checkCols9(xNum);
-            }
-            if (greenSBlock.onSide == true) {
-                tetrisController.checkCols1(xNum);
-            }
-            //tetrisController.controler[1][9]=TetrisController.colr;
-            if (reached == true) {
-                if (greenSBlock.onSide == true) {
-                    tetrisController.controler[yNum + 1][xNum] = TetrisController.colr;
-                    tetrisController.controler[yNum][xNum] = TetrisController.colr;
-                    tetrisController.controler[yNum][xNum + 1] = TetrisController.colr;
-                    tetrisController.controler[yNum + 1][xNum - 1] = TetrisController.colr;
-                }
-                if (greenSBlock.onSide == false) {
-                    tetrisController.controler[yNum][xNum - 1] = TetrisController.colr;
-                    tetrisController.controler[yNum + 1][xNum - 1] = TetrisController.colr;
-                    tetrisController.controler[yNum + 1][xNum] = TetrisController.colr;
-                    tetrisController.controler[yNum + 2][xNum] = TetrisController.colr;
-                }
-            }
-        }
-        if (num == 5) {
-            BlueSBlock.num = 5;
-            blueSBlock.paint(g);
-            Panel.shapeEnd = false;
-            tetrisController.checkRow1();
-            if (blueSBlock.onSide == false) {
-                tetrisController.checkCols2(xNum);
-            }
-            if (blueSBlock.onSide == true) {
-                tetrisController.checkCols10(xNum);
-            }
-            if (reached == true) {
-                if (blueSBlock.onSide == true) {
-                    tetrisController.controler[yNum + 1][xNum] = TetrisController.colr;
-                    tetrisController.controler[yNum][xNum] = TetrisController.colr;
-                    tetrisController.controler[yNum + 1][xNum + 1] = TetrisController.colr;
-                    tetrisController.controler[yNum][xNum - 1] = TetrisController.colr;
-                }
-                if (blueSBlock.onSide == false) {
-                    tetrisController.controler[yNum][xNum + 1] = TetrisController.colr;
-                    tetrisController.controler[yNum + 1][xNum + 1] = TetrisController.colr;
-                    tetrisController.controler[yNum + 1][xNum] = TetrisController.colr;
-                    tetrisController.controler[yNum + 2][xNum] = TetrisController.colr;
-                }
-            }
-        }
-
-        repaint();
-
-        g.dispose();
-
-    }
-
-    public void keyPressed(KeyEvent e) {
-        if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-            if (cyanBarBlock.onSide == false) {
-                if (cyanBarBlock.x3 > 20) {
-                    cyanBarBlock.x1 = cyanBarBlock.x1 - 20;
-                    cyanBarBlock.x2 = cyanBarBlock.x2 - 20;
-                    cyanBarBlock.x3 = cyanBarBlock.x3 - 20;
-                }
-            }
-            if (cyanBarBlock.onSide == true) {
-                if (cyanBarBlock.x3 > 60) {
-                    cyanBarBlock.x1 = cyanBarBlock.x1 - 20;
-                    cyanBarBlock.x2 = cyanBarBlock.x2 - 20;
-                    cyanBarBlock.x3 = cyanBarBlock.x3 - 20;
-                }
-            }
-            if (redCrossBlock.onSide == 1) {
-                if (redCrossBlock.x3 > 20) {
-                    redCrossBlock.x1 = redCrossBlock.x1 - 20;
-                    redCrossBlock.x2 = redCrossBlock.x2 - 20;
-                    redCrossBlock.x3 = redCrossBlock.x3 - 20;
-                    redCrossBlock.x4 = redCrossBlock.x4 - 20;
-                }
-            }
-            if (redCrossBlock.onSide == 2) {
-                if (redCrossBlock.x3 > 60) {
-                    redCrossBlock.x1 = redCrossBlock.x1 - 20;
-                    redCrossBlock.x2 = redCrossBlock.x2 - 20;
-                    redCrossBlock.x3 = redCrossBlock.x3 - 20;
-                    redCrossBlock.x4 = redCrossBlock.x4 - 20;
-                }
-            }
-            if (redCrossBlock.onSide == 3) {
-                if (redCrossBlock.x3 > 40) {
-                    redCrossBlock.x1 = redCrossBlock.x1 - 20;
-                    redCrossBlock.x2 = redCrossBlock.x2 - 20;
-                    redCrossBlock.x3 = redCrossBlock.x3 - 20;
-                    redCrossBlock.x4 = redCrossBlock.x4 - 20;
-                }
-            }
-            if (redCrossBlock.onSide == 4) {
-                if (redCrossBlock.x3 > 40) {
-                    redCrossBlock.x1 = redCrossBlock.x1 - 20;
-                    redCrossBlock.x2 = redCrossBlock.x2 - 20;
-                    redCrossBlock.x3 = redCrossBlock.x3 - 20;
-                    redCrossBlock.x4 = redCrossBlock.x4 - 20;
-                }
-            }
-            if (yellowSquareBlock.x3 > 40) {
-                yellowSquareBlock.x1 = yellowSquareBlock.x1 - 20;
-                yellowSquareBlock.x2 = yellowSquareBlock.x2 - 20;
-                yellowSquareBlock.x3 = yellowSquareBlock.x3 - 20;
-                yellowSquareBlock.x4 = yellowSquareBlock.x4 - 20;
-            }
-
-            if (greenSBlock.onSide == true) {
-                if (greenSBlock.x3 > 40) {
-                    greenSBlock.x1 = greenSBlock.x1 - 20;
-                    greenSBlock.x2 = greenSBlock.x2 - 20;
-                    greenSBlock.x3 = greenSBlock.x3 - 20;
-                    greenSBlock.x4 = greenSBlock.x4 - 20;
-                }
-            }
-            if (greenSBlock.onSide == false) {
-                if (greenSBlock.x3 > 40) {
-                    greenSBlock.x1 = greenSBlock.x1 - 20;
-                    greenSBlock.x2 = greenSBlock.x2 - 20;
-                    greenSBlock.x3 = greenSBlock.x3 - 20;
-                    greenSBlock.x4 = greenSBlock.x4 - 20;
-                }
-            }
-            if (blueSBlock.onSide == true) {
-                if (blueSBlock.x3 > 40) {
-                    blueSBlock.x1 = blueSBlock.x1 - 20;
-                    blueSBlock.x2 = blueSBlock.x2 - 20;
-                    blueSBlock.x3 = blueSBlock.x3 - 20;
-                    blueSBlock.x4 = blueSBlock.x4 - 20;
-                }
-            }
-            if (blueSBlock.onSide == false) {
-                if (blueSBlock.x3 > 20) {
-                    blueSBlock.x1 = blueSBlock.x1 - 20;
-                    blueSBlock.x2 = blueSBlock.x2 - 20;
-                    blueSBlock.x3 = blueSBlock.x3 - 20;
-                    blueSBlock.x4 = blueSBlock.x4 - 20;
-                }
-            }
-        }
-        if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-            if (cyanBarBlock.x3 < 261) {
-                cyanBarBlock.x1 = cyanBarBlock.x1 + 20;
-                cyanBarBlock.x2 = cyanBarBlock.x2 + 20;
-                cyanBarBlock.x3 = cyanBarBlock.x3 + 20;
-            }
-            if (redCrossBlock.onSide == 1) {
-                if (redCrossBlock.x3 < 260) {
-                    redCrossBlock.x1 = redCrossBlock.x1 + 20;
-                    redCrossBlock.x2 = redCrossBlock.x2 + 20;
-                    redCrossBlock.x3 = redCrossBlock.x3 + 20;
-                    redCrossBlock.x4 = redCrossBlock.x4 + 20;
-                }
-            }
-            if (redCrossBlock.onSide == 2) {
-                if (redCrossBlock.x3 < 280) {
-                    redCrossBlock.x1 = redCrossBlock.x1 + 20;
-                    redCrossBlock.x2 = redCrossBlock.x2 + 20;
-                    redCrossBlock.x3 = redCrossBlock.x3 + 20;
-                    redCrossBlock.x4 = redCrossBlock.x4 + 20;
-                }
-            }
-            if (redCrossBlock.onSide == 3) {
-                if (redCrossBlock.x3 < 260) {
-                    redCrossBlock.x1 = redCrossBlock.x1 + 20;
-                    redCrossBlock.x2 = redCrossBlock.x2 + 20;
-                    redCrossBlock.x3 = redCrossBlock.x3 + 20;
-                    redCrossBlock.x4 = redCrossBlock.x4 + 20;
-                }
-            }
-            if (redCrossBlock.onSide == 4) {
-                if (redCrossBlock.x3 < 280) {
-                    redCrossBlock.x1 = redCrossBlock.x1 + 20;
-                    redCrossBlock.x2 = redCrossBlock.x2 + 20;
-                    redCrossBlock.x3 = redCrossBlock.x3 + 20;
-                    redCrossBlock.x4 = redCrossBlock.x4 + 20;
-                }
-            }
-            if (yellowSquareBlock.x3 < 261) {
-                yellowSquareBlock.x1 = yellowSquareBlock.x1 + 20;
-                yellowSquareBlock.x2 = yellowSquareBlock.x2 + 20;
-                yellowSquareBlock.x3 = yellowSquareBlock.x3 + 20;
-                yellowSquareBlock.x4 = yellowSquareBlock.x4 + 20;
-            }
-            if (greenSBlock.onSide == true) {
-                if (greenSBlock.x3 < 260) {
-                    greenSBlock.x1 = greenSBlock.x1 + 20;
-                    greenSBlock.x2 = greenSBlock.x2 + 20;
-                    greenSBlock.x3 = greenSBlock.x3 + 20;
-                    greenSBlock.x4 = greenSBlock.x4 + 20;
-                }
-            }
-            if (greenSBlock.onSide == false) {
-                if (greenSBlock.x3 < 280) {
-                    greenSBlock.x1 = greenSBlock.x1 + 20;
-                    greenSBlock.x2 = greenSBlock.x2 + 20;
-                    greenSBlock.x3 = greenSBlock.x3 + 20;
-                    greenSBlock.x4 = greenSBlock.x4 + 20;
-                }
-            }
-
-            if (blueSBlock.onSide == true) {
-                if (blueSBlock.x3 < 260) {
-                    blueSBlock.x1 = blueSBlock.x1 + 20;
-                    blueSBlock.x2 = blueSBlock.x2 + 20;
-                    blueSBlock.x3 = blueSBlock.x3 + 20;
-                    blueSBlock.x4 = blueSBlock.x4 + 20;
-                }
-            }
-            if (blueSBlock.onSide == false) {
-                if (blueSBlock.x3 < 260) {
-                    blueSBlock.x1 = blueSBlock.x1 + 20;
-                    blueSBlock.x2 = blueSBlock.x2 + 20;
-                    blueSBlock.x3 = blueSBlock.x3 + 20;
-                    blueSBlock.x4 = blueSBlock.x4 + 20;
-                }
-            }
-        }
-        if (e.getKeyCode() == KeyEvent.VK_UP) {
-            ++spin;
-            if (spin == 1 || spin == 3) {
-                if (Panel.shapeEnd == false) {
-
-                    cyanBarBlock.onSide = false;
-                    yellowSquareBlock.onSide = false;
-                    greenSBlock.onSide = false;
-                    blueSBlock.onSide = false;
-                    cyanBarBlock.offSet = cyanBarBlock.y2;
-                    cyanBarBlock.offSet2 = cyanBarBlock.x2;
-                    greenSBlock.offSet = greenSBlock.y3;
-                    greenSBlock.offSet2 = greenSBlock.x3;
-                    blueSBlock.offSet = blueSBlock.y3;
-                    blueSBlock.offSet2 = blueSBlock.x3;
-                    if (greenSBlock.onSide == false) {
-                        greenSBlock.shape();
-                    }
-                    if (cyanBarBlock.onSide == false) {
-                        cyanBarBlock.bar();
-                    }
-                    if (cyanBarBlock.onSide == false) {
-                        yellowSquareBlock.square();
-                    }
-                    if (blueSBlock.onSide == false) {
-                        blueSBlock.shape();
-                    }
-                }
-                System.out.println(spin);
-            }
-            if (spin == 2 || spin == 4) {
-                if (Panel.shapeEnd == false) {
-                    cyanBarBlock.onSide = true;
-                    yellowSquareBlock.onSide = true;
-                    greenSBlock.onSide = true;
-                    blueSBlock.onSide = true;
-                    cyanBarBlock.offSet = cyanBarBlock.y2;
-                    cyanBarBlock.offSet2 = cyanBarBlock.x2;
-                    greenSBlock.offSet = greenSBlock.y3;
-                    greenSBlock.offSet2 = greenSBlock.x3;
-                    blueSBlock.offSet = blueSBlock.y3;
-                    blueSBlock.offSet2 = blueSBlock.x3;
-                    if (cyanBarBlock.onSide == true) {
-                        cyanBarBlock.barOnItsSide();
-                    }
-                    if (cyanBarBlock.onSide == true) {
-                        yellowSquareBlock.square();
-                    }
-                    if (greenSBlock.onSide == true) {
-                        greenSBlock.shapeOnItsSide();
-                    }
-                    if (blueSBlock.onSide == true) {
-                        blueSBlock.shapeOnItsSide();
-                    }
-                }
-            }
-            System.out.println(" spin : " + spin);
-            //redCrossBlock.onSide=1;
-            if (firstShape == true) {
-                spin = 2;
-            }
-            if (spin == 1 && spin != 3) {
-                System.out.println("   inside it now!");
-                if (Panel.shapeEnd == false) {
-                    redCrossBlock.onSide = 1;
-                    redCrossBlock.offSet = redCrossBlock.y2;
-                    redCrossBlock.offSet2 = redCrossBlock.x2;
-                    //redCrossBlock.shapeTeeUp();
-                    redCrossBlock.shapeTeeRight();
-                }
-            }
-            if (spin == 2 && spin != 4) {
-                firstShape = false;  //bug fix
-                if (Panel.shapeEnd == false) {
-                    redCrossBlock.onSide = 2;
-                    redCrossBlock.offSet = redCrossBlock.y2;
-                    redCrossBlock.offSet2 = redCrossBlock.x2;
-                    //redCrossBlock.shapeTeeRight();
-                    redCrossBlock.shapeTeeUp();
-                }
-            }
-            if (spin == 3 && spin != 1) {
-
-                if (Panel.shapeEnd == false) {
-                    redCrossBlock.onSide = 3;
-                    redCrossBlock.offSet = redCrossBlock.y2;
-                    redCrossBlock.offSet2 = redCrossBlock.x2;
-                    redCrossBlock.shapeTeeBottom();
-                }
-            }
-            if (spin == 4 && spin != 2) {
-                if (Panel.shapeEnd == false) {
-                    redCrossBlock.onSide = 4;
-                    redCrossBlock.offSet = redCrossBlock.y2;
-                    redCrossBlock.offSet2 = redCrossBlock.x2;
-                    redCrossBlock.shapeTeeLeft();
-                    spin = 0;
-                }
-            }
-        }
-
-        if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-            if (cyanBarBlock.y3 < 261) {
-                cyanBarBlock.y1 = cyanBarBlock.y1 + 1000;
-                cyanBarBlock.y2 = cyanBarBlock.y2 + 1000;
-                cyanBarBlock.y3 = cyanBarBlock.y3 + 1000;
-            }
-            if (redCrossBlock.onSide == 1) {
-                if (redCrossBlock.y3 < 260) {
-                    redCrossBlock.y1 = redCrossBlock.y1 + 1000;
-                    redCrossBlock.y2 = redCrossBlock.y2 + 1000;
-                    redCrossBlock.y3 = redCrossBlock.y3 + 1000;
-                    redCrossBlock.y4 = redCrossBlock.y4 + 1000;
-                }
-            }
-            if (redCrossBlock.onSide == 2) {
-                if (redCrossBlock.y3 < 280) {
-                    redCrossBlock.y1 = redCrossBlock.y1 + 1000;
-                    redCrossBlock.y2 = redCrossBlock.y2 + 1000;
-                    redCrossBlock.y3 = redCrossBlock.y3 + 1000;
-                    redCrossBlock.y4 = redCrossBlock.y4 + 1000;
-                }
-            }
-            if (redCrossBlock.onSide == 3) {
-                if (redCrossBlock.y3 < 260) {
-                    redCrossBlock.y1 = redCrossBlock.y1 + 1000;
-                    redCrossBlock.y2 = redCrossBlock.y2 + 1000;
-                    redCrossBlock.y3 = redCrossBlock.y3 + 1000;
-                    redCrossBlock.y4 = redCrossBlock.y4 + 1000;
-                }
-            }
-            if (redCrossBlock.onSide == 4) {
-                if (redCrossBlock.y3 < 280) {
-                    redCrossBlock.y1 = redCrossBlock.y1 + 1000;
-                    redCrossBlock.y2 = redCrossBlock.y2 + 1000;
-                    redCrossBlock.y3 = redCrossBlock.y3 + 1000;
-                    redCrossBlock.y4 = redCrossBlock.y4 + 1000;
-                }
-            }
-            if (yellowSquareBlock.y3 < 261) {
-                yellowSquareBlock.y1 = yellowSquareBlock.y1 + 1000;
-                yellowSquareBlock.y2 = yellowSquareBlock.y2 + 1000;
-                yellowSquareBlock.y3 = yellowSquareBlock.y3 + 1000;
-                yellowSquareBlock.y4 = yellowSquareBlock.y4 + 1000;
-            }
-            if (greenSBlock.onSide == true) {
-                if (greenSBlock.y3 < 260) {
-                    greenSBlock.y1 = greenSBlock.y1 + 1000;
-                    greenSBlock.y2 = greenSBlock.y2 + 1000;
-                    greenSBlock.y3 = greenSBlock.y3 + 1000;
-                    greenSBlock.y4 = greenSBlock.y4 + 1000;
-                }
-            }
-            if (greenSBlock.onSide == false) {
-                if (greenSBlock.y3 < 280) {
-                    greenSBlock.y1 = greenSBlock.y1 + 1000;
-                    greenSBlock.y2 = greenSBlock.y2 + 1000;
-                    greenSBlock.y3 = greenSBlock.y3 + 1000;
-                    greenSBlock.y4 = greenSBlock.y4 + 1000;
-                }
-            }
-
-            if (blueSBlock.onSide == true) {
-                if (blueSBlock.y3 < 260) {
-                    blueSBlock.y1 = blueSBlock.y1 + 1000;
-                    blueSBlock.y2 = blueSBlock.y2 + 1000;
-                    blueSBlock.y3 = blueSBlock.y3 + 1000;
-                    blueSBlock.y4 = blueSBlock.y4 + 1000;
-                }
-            }
-            if (blueSBlock.onSide == false) {
-                if (blueSBlock.y3 < 260) {
-                    blueSBlock.y1 = blueSBlock.y1 + 1000;
-                    blueSBlock.y2 = blueSBlock.y2 + 1000;
-                    blueSBlock.y3 = blueSBlock.y3 + 1000;
-                    blueSBlock.y4 = blueSBlock.y4 + 1000;
-                }
-            }
-        }
-
-    }
-
-    public void keyReleased(KeyEvent e) {
-    }
-
-    public void keyTyped(KeyEvent e) {
+        statusbar = frame.getStatusBar();
+        board = new BlockType[BoardWidth * BoardHeight];
+        addKeyListener(new TAdapter());
+        clearBoard();
     }
 
     public void actionPerformed(ActionEvent e) {
+        if (isFallingFinished) {
+            isFallingFinished = false;
+            newPiece();
+        } else {
+            oneLineDown();
+        }
+    }
+
+    public void setRandomBlock() {
+        Random r = new Random();
+        int x = Math.abs(r.nextInt()) % 5 + 1;
+        BlockType[] values = BlockType.values();
+        curPiece = blockFactory.makeBlock(values[x]);
+    }
+
+    int squareWidth() {
+        return (int) getSize().getWidth() / BoardWidth;
+    }
+
+    int squareHeight() {
+        return (int) getSize().getHeight() / BoardHeight;
+    }
+
+    BlockType shapeAt(int x, int y) {
+        return board[(y * BoardWidth) + x];
+    }
+
+    public void start() {
+        if (isPaused) {
+            return;
+        }
+
+        isStarted = true;
+        isFallingFinished = false;
+        numLinesRemoved = 0;
+        clearBoard();
+
+        newPiece();
+        timer.start();
+    }
+
+    private void pause() {
+        if (!isStarted) {
+            return;
+        }
+
+        isPaused = !isPaused;
+        if (isPaused) {
+            timer.stop();
+            statusbar.setText("paused");
+        } else {
+            timer.start();
+            statusbar.setText(String.valueOf(numLinesRemoved));
+        }
+        repaint();
+    }
+
+    public void paint(Graphics g) {
+        super.paint(g);
+
+        Dimension size = getSize();
+        int boardTop = (int) size.getHeight() - BoardHeight * squareHeight();
+
+        for (int i = 0; i < BoardHeight; ++i) {
+            for (int j = 0; j < BoardWidth; ++j) {
+                BlockType shape = shapeAt(j, BoardHeight - i - 1);
+                if (shape != BlockType.NoShapeBlock) {
+                    drawSquare(g, 0 + j * squareWidth(),
+                            boardTop + i * squareHeight(), shape);
+                }
+            }
+        }
+
+        if (curPiece.getBlockType() != BlockType.NoShapeBlock) {
+            for (int i = 0; i < 4; ++i) {
+                int x = curX + curPiece.x(i);
+                int y = curY - curPiece.y(i);
+                drawSquare(g, 0 + x * squareWidth(),
+                        boardTop + (BoardHeight - y - 1) * squareHeight(),
+                        curPiece.getBlockType());
+            }
+        }
+    }
+
+    private void dropDown() {
+        int newY = curY;
+        while (newY > 0) {
+            if (!tryMove(curPiece, curX, newY - 1)) {
+                break;
+            }
+            --newY;
+        }
+        pieceDropped();
+    }
+
+    private void oneLineDown() {
+        if (!tryMove(curPiece, curX, curY - 1)) {
+            pieceDropped();
+        }
+    }
+
+    private void clearBoard() {
+        for (int i = 0; i < BoardHeight * BoardWidth; ++i) {
+            board[i] = BlockType.NoShapeBlock;
+        }
+    }
+
+    private void pieceDropped() {
+        for (int i = 0; i < 4; ++i) {
+            int x = curX + curPiece.x(i);
+            int y = curY - curPiece.y(i);
+            board[(y * BoardWidth) + x] = curPiece.getBlockType();
+        }
+
+        removeFullLines();
+
+        if (!isFallingFinished) {
+            newPiece();
+        }
+    }
+
+    private void newPiece() {
+        setRandomBlock();
+        curX = BoardWidth / 2 + 1;
+        curY = BoardHeight - 1 + curPiece.minY();
+
+        if (!tryMove(curPiece, curX, curY)) {
+            curPiece.setBlockType(BlockType.NoShapeBlock);
+            timer.stop();
+            isStarted = false;
+            statusbar.setText("game over");
+        }
+    }
+
+    private boolean tryMove(Block newPiece, int newX, int newY) {
+        for (int i = 0; i < 4; ++i) {
+            int x = newX + newPiece.x(i);
+            int y = newY - newPiece.y(i);
+            if (x < 0 || x >= BoardWidth || y < 0 || y >= BoardHeight) {
+                return false;
+            }
+            if (shapeAt(x, y) != BlockType.NoShapeBlock) {
+                return false;
+            }
+        }
+
+        curPiece = newPiece;
+        curX = newX;
+        curY = newY;
+        repaint();
+        return true;
+    }
+
+    private void removeFullLines() {
+        int numFullLines = 0;
+
+        for (int i = BoardHeight - 1; i >= 0; --i) {
+            boolean lineIsFull = true;
+
+            for (int j = 0; j < BoardWidth; ++j) {
+                if (shapeAt(j, i) == BlockType.NoShapeBlock) {
+                    lineIsFull = false;
+                    break;
+                }
+            }
+
+            if (lineIsFull) {
+                ++numFullLines;
+                for (int k = i; k < BoardHeight - 1; ++k) {
+                    for (int j = 0; j < BoardWidth; ++j) {
+                        board[(k * BoardWidth) + j] = shapeAt(j, k + 1);
+                    }
+                }
+            }
+        }
+
+        if (numFullLines > 0) {
+            numLinesRemoved += numFullLines;
+            statusbar.setText(String.valueOf(numLinesRemoved));
+            isFallingFinished = true;
+            curPiece.setBlockType(BlockType.NoShapeBlock);
+            repaint();
+        }
+    }
+
+    private void drawSquare(Graphics g, int x, int y, BlockType shape) {
+        Color colors[] = {new Color(0, 0, 0), new Color(204, 102, 102),
+                new Color(102, 204, 102), new Color(102, 102, 204),
+                new Color(204, 204, 102), new Color(204, 102, 204),
+                new Color(102, 204, 204), new Color(218, 170, 0)
+        };
+
+        Color color = colors[shape.ordinal()];
+
+        g.setColor(color);
+        g.fillRect(x + 1, y + 1, squareWidth() - 2, squareHeight() - 2);
+
+        g.setColor(color.brighter());
+        g.drawLine(x, y + squareHeight() - 1, x, y);
+        g.drawLine(x, y, x + squareWidth() - 1, y);
+
+        g.setColor(color.darker());
+        g.drawLine(x + 1, y + squareHeight() - 1,
+                x + squareWidth() - 1, y + squareHeight() - 1);
+        g.drawLine(x + squareWidth() - 1, y + squareHeight() - 1,
+                x + squareWidth() - 1, y + 1);
+    }
+
+    class TAdapter extends KeyAdapter {
+
+        public void keyPressed(KeyEvent e) {
+
+            if (!isStarted || curPiece.getBlockType() == BlockType.NoShapeBlock) {
+                return;
+            }
+
+            int keycode = e.getKeyCode();
+
+            if (keycode == 'p' || keycode == 'P') {
+                pause();
+                return;
+            }
+
+            if (isPaused) {
+                return;
+            }
+
+            switch (keycode) {
+                case KeyEvent.VK_LEFT:
+                    tryMove(curPiece, curX - 1, curY);
+                    break;
+                case KeyEvent.VK_RIGHT:
+                    tryMove(curPiece, curX + 1, curY);
+                    break;
+                case KeyEvent.VK_DOWN:
+                    tryMove(curPiece.rotateRight(), curX, curY);
+                    break;
+                case KeyEvent.VK_UP:
+                    tryMove(curPiece.rotateLeft(), curX, curY);
+                    break;
+                case KeyEvent.VK_SPACE:
+                    dropDown();
+                    break;
+                case 'd':
+                    oneLineDown();
+                    break;
+                case 'D':
+                    oneLineDown();
+                    break;
+            }
+
+        }
     }
 }
 

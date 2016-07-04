@@ -1,11 +1,8 @@
 package tetris.model;
 
-import tetris.controller.TetrisController;
 import tetris.model.factory.Block;
 import tetris.model.factory.BlockType;
 
-import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -14,16 +11,16 @@ import java.awt.event.ActionListener;
  */
 public class CyanBarBlock extends Block implements ActionListener {
 
-    private BlockType pieceShape;
+    private BlockType cyanBarBlockType = BlockType.CyanBarBlock;
     private int coords[][];
     private int[][][] coordsTable;
 
     public CyanBarBlock() {
         coords = new int[4][2];
-        setShape(BlockType.CyanBarBlock);
+        setBlockType(BlockType.CyanBarBlock);
     }
 
-    public void setShape(BlockType shape) {
+    public void setBlockType(BlockType shape) {
 
         coordsTable = new int[][][]{
                 {{0, 0}, {0, 0}, {0, 0}, {0, 0}},
@@ -41,7 +38,7 @@ public class CyanBarBlock extends Block implements ActionListener {
                 coords[i][j] = coordsTable[shape.ordinal()][i][j];
             }
         }
-        pieceShape = shape;
+        cyanBarBlockType = shape;
 
     }
 
@@ -53,14 +50,19 @@ public class CyanBarBlock extends Block implements ActionListener {
         coords[index][1] = y;
     }
 
+    @Override
     public int x(int index) {
+
         return coords[index][0];
     }
 
+    @Override
     public int y(int index) {
+
         return coords[index][1];
     }
 
+    @Override
     public int minX() {
         int m = coords[0][0];
         for (int i = 0; i < 4; i++) {
@@ -69,6 +71,7 @@ public class CyanBarBlock extends Block implements ActionListener {
         return m;
     }
 
+    @Override
     public int minY() {
         int m = coords[0][1];
         for (int i = 0; i < 4; i++) {
@@ -77,10 +80,11 @@ public class CyanBarBlock extends Block implements ActionListener {
         return m;
     }
 
+    @Override
     public CyanBarBlock rotateLeft() {
 
         CyanBarBlock result = new CyanBarBlock();
-        result.pieceShape = pieceShape;
+        result.cyanBarBlockType = cyanBarBlockType;
 
         for (int i = 0; i < 4; ++i) {
             result.setX(i, y(i));
@@ -89,10 +93,11 @@ public class CyanBarBlock extends Block implements ActionListener {
         return result;
     }
 
+    @Override
     public CyanBarBlock rotateRight() {
 
         CyanBarBlock result = new CyanBarBlock();
-        result.pieceShape = pieceShape;
+        result.cyanBarBlockType = cyanBarBlockType;
 
         for (int i = 0; i < 4; ++i) {
             result.setX(i, -y(i));
@@ -104,6 +109,11 @@ public class CyanBarBlock extends Block implements ActionListener {
     @Override
     public Block getBlock() {
         return this;
+    }
+
+    @Override
+    public BlockType getBlockType() {
+        return this.cyanBarBlockType;
     }
 
     public void actionPerformed(ActionEvent e) {

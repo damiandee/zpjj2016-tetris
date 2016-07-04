@@ -10,32 +10,30 @@ import java.awt.*;
 
 public class Frame extends JFrame {
 
-    private static final long serialVersionUID = 1L;
-    public tetris.view.Panel panel;
-    public Dimension dimension;
-    int locX;
-    int locY;
+    JLabel statusbar;
 
-    public Frame() throws InterruptedException {
+    public Frame() {
 
-        dimension = Toolkit.getDefaultToolkit().getScreenSize();
-        locX = (int) dimension.getWidth() * 4 / 12;
-        locY = (int) dimension.getHeight() * 2 / 12;
-        panel = new tetris.view.Panel();
-        this.setTitle("TETRIS");
-        this.setSize(326, 585);
-        this.setLocation(locX, locY);
+        statusbar = new JLabel(" 0");
+        add(statusbar, BorderLayout.SOUTH);
+        Panel panel = new Panel(this);
+        add(panel);
+        panel.start();
 
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setVisible(true);
-        this.setFocusable(true);
-        this.setResizable(false);
-        this.add(panel);
-        addKeyListener(panel);
-
+        setSize(200, 400);
+        setTitle("Tetris");
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 
-    public static void main(String[] args) throws InterruptedException {
-        new Frame();
+    public JLabel getStatusBar() {
+        return statusbar;
+    }
+
+    public static void main(String[] args) {
+
+        Frame game = new Frame();
+        game.setLocationRelativeTo(null);
+        game.setVisible(true);
+
     }
 }

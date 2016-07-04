@@ -1,11 +1,8 @@
 package tetris.model;
 
-import tetris.controller.TetrisController;
 import tetris.model.factory.Block;
 import tetris.model.factory.BlockType;
 
-import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -14,16 +11,17 @@ import java.awt.event.ActionListener;
  */
 public class GreenSBlock extends Block implements ActionListener {
 
-    private BlockType pieceShape;
+    private BlockType greenSBlockType = BlockType.GreenSBlock;
     private int coords[][];
     private int[][][] coordsTable;
 
     public GreenSBlock() {
         coords = new int[4][2];
-        setShape(BlockType.GreenSBlock);
+        setBlockType(BlockType.GreenSBlock);
     }
 
-    public void setShape(BlockType shape) {
+    @Override
+    public void setBlockType(BlockType shape) {
 
         coordsTable = new int[][][]{
                 {{0, 0}, {0, 0}, {0, 0}, {0, 0}},
@@ -41,7 +39,7 @@ public class GreenSBlock extends Block implements ActionListener {
                 coords[i][j] = coordsTable[shape.ordinal()][i][j];
             }
         }
-        pieceShape = shape;
+        greenSBlockType = shape;
 
     }
 
@@ -53,14 +51,17 @@ public class GreenSBlock extends Block implements ActionListener {
         coords[index][1] = y;
     }
 
+    @Override
     public int x(int index) {
         return coords[index][0];
     }
 
+    @Override
     public int y(int index) {
         return coords[index][1];
     }
 
+    @Override
     public int minX() {
         int m = coords[0][0];
         for (int i = 0; i < 4; i++) {
@@ -69,6 +70,7 @@ public class GreenSBlock extends Block implements ActionListener {
         return m;
     }
 
+    @Override
     public int minY() {
         int m = coords[0][1];
         for (int i = 0; i < 4; i++) {
@@ -77,10 +79,11 @@ public class GreenSBlock extends Block implements ActionListener {
         return m;
     }
 
+    @Override
     public GreenSBlock rotateLeft() {
 
         GreenSBlock result = new GreenSBlock();
-        result.pieceShape = pieceShape;
+        result.greenSBlockType = greenSBlockType;
 
         for (int i = 0; i < 4; ++i) {
             result.setX(i, y(i));
@@ -89,10 +92,11 @@ public class GreenSBlock extends Block implements ActionListener {
         return result;
     }
 
+    @Override
     public GreenSBlock rotateRight() {
 
         GreenSBlock result = new GreenSBlock();
-        result.pieceShape = pieceShape;
+        result.greenSBlockType = greenSBlockType;
 
         for (int i = 0; i < 4; ++i) {
             result.setX(i, -y(i));
@@ -104,6 +108,11 @@ public class GreenSBlock extends Block implements ActionListener {
     @Override
     public Block getBlock() {
         return this;
+    }
+
+    @Override
+    public  BlockType getBlockType() {
+        return this.greenSBlockType;
     }
 
     public void actionPerformed(ActionEvent e) {

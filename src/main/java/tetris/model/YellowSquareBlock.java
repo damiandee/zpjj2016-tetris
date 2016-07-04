@@ -1,12 +1,8 @@
 package tetris.model;
 
-import tetris.controller.TetrisController;
 import tetris.model.factory.Block;
 import tetris.model.factory.BlockType;
-import tetris.view.Panel;
 
-import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -15,16 +11,16 @@ import java.awt.event.ActionListener;
  */
 public class YellowSquareBlock extends Block implements ActionListener {
 
-    private BlockType pieceShape;
+    private BlockType yellowSquareBlockType = BlockType.YellowSquareBlock;
     private int coords[][];
     private int[][][] coordsTable;
 
     public YellowSquareBlock() {
         coords = new int[4][2];
-        setShape(BlockType.YellowSquareBlock);
+        setBlockType(BlockType.YellowSquareBlock);
     }
 
-    public void setShape(BlockType shape) {
+    public void setBlockType(BlockType shape) {
 
         coordsTable = new int[][][]{
                 {{0, 0}, {0, 0}, {0, 0}, {0, 0}},
@@ -42,7 +38,7 @@ public class YellowSquareBlock extends Block implements ActionListener {
                 coords[i][j] = coordsTable[shape.ordinal()][i][j];
             }
         }
-        pieceShape = shape;
+        yellowSquareBlockType = shape;
 
     }
 
@@ -54,14 +50,17 @@ public class YellowSquareBlock extends Block implements ActionListener {
         coords[index][1] = y;
     }
 
+    @Override
     public int x(int index) {
         return coords[index][0];
     }
 
+    @Override
     public int y(int index) {
         return coords[index][1];
     }
 
+    @Override
     public int minX() {
         int m = coords[0][0];
         for (int i = 0; i < 4; i++) {
@@ -70,6 +69,7 @@ public class YellowSquareBlock extends Block implements ActionListener {
         return m;
     }
 
+    @Override
     public int minY() {
         int m = coords[0][1];
         for (int i = 0; i < 4; i++) {
@@ -78,11 +78,13 @@ public class YellowSquareBlock extends Block implements ActionListener {
         return m;
     }
 
+    @Override
     public YellowSquareBlock rotateLeft() {
 
         return this;
     }
 
+    @Override
     public YellowSquareBlock rotateRight() {
 
         return this;
@@ -91,6 +93,11 @@ public class YellowSquareBlock extends Block implements ActionListener {
     @Override
     public Block getBlock() {
         return this;
+    }
+
+    @Override
+    public BlockType getBlockType() {
+        return this.yellowSquareBlockType;
     }
 
     public void actionPerformed(ActionEvent e) {
