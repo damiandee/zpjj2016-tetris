@@ -12,7 +12,7 @@ import java.awt.event.ActionListener;
 /**
  * Created by Dominika on 2016-07-03.
  */
-public class RedCrossBlock implements ActionListener {
+public class RedCrossBlock extends Block implements ActionListener {
 
     public int x1, x2, x3, x4;
     public int y1, y2, y3, y4;
@@ -27,6 +27,11 @@ public class RedCrossBlock implements ActionListener {
         coordinates();
         time = new Timer(40, this);
         time.stop();
+    }
+
+    @Override
+    public Block getBlock() {
+        return this;
     }
 
     public void coordinates() {

@@ -27,8 +27,8 @@ public class Panel extends JPanel implements KeyListener, ActionListener {
     CyanBarBlock cyanBarBlock;
     RedCrossBlock redCrossBlock;
     YellowSquareBlock yellowSquareBlock;
-    GreenStairBlock greenStairBlock;
-    BlueStairsBlock blueStairsBlock;
+    GreenSBlock greenSBlock;
+    BlueSBlock blueSBlock;
 
     Timer time;
 
@@ -38,8 +38,8 @@ public class Panel extends JPanel implements KeyListener, ActionListener {
         cyanBarBlock = new CyanBarBlock();
         redCrossBlock = new RedCrossBlock();
         yellowSquareBlock = new YellowSquareBlock();
-        greenStairBlock = new GreenStairBlock();
-        blueStairsBlock = new BlueStairsBlock();
+        greenSBlock = new GreenSBlock();
+        blueSBlock = new BlueSBlock();
         spin = 0;
         this.setSize(350, 300);
         this.setVisible(true);
@@ -186,25 +186,25 @@ public class Panel extends JPanel implements KeyListener, ActionListener {
             }
         }
         if (num == 4) {
-            GreenStairBlock.num = 4;
-            greenStairBlock.paint(g);
+            GreenSBlock.num = 4;
+            greenSBlock.paint(g);
             Panel.shapeEnd = false;
             tetrisController.checkRow1();
-            if (greenStairBlock.onSide == false) {
+            if (greenSBlock.onSide == false) {
                 tetrisController.checkCols9(xNum);
             }
-            if (greenStairBlock.onSide == true) {
+            if (greenSBlock.onSide == true) {
                 tetrisController.checkCols1(xNum);
             }
             //tetrisController.controler[1][9]=TetrisController.colr;
             if (reached == true) {
-                if (greenStairBlock.onSide == true) {
+                if (greenSBlock.onSide == true) {
                     tetrisController.controler[yNum + 1][xNum] = TetrisController.colr;
                     tetrisController.controler[yNum][xNum] = TetrisController.colr;
                     tetrisController.controler[yNum][xNum + 1] = TetrisController.colr;
                     tetrisController.controler[yNum + 1][xNum - 1] = TetrisController.colr;
                 }
-                if (greenStairBlock.onSide == false) {
+                if (greenSBlock.onSide == false) {
                     tetrisController.controler[yNum][xNum - 1] = TetrisController.colr;
                     tetrisController.controler[yNum + 1][xNum - 1] = TetrisController.colr;
                     tetrisController.controler[yNum + 1][xNum] = TetrisController.colr;
@@ -213,24 +213,24 @@ public class Panel extends JPanel implements KeyListener, ActionListener {
             }
         }
         if (num == 5) {
-            BlueStairsBlock.num = 5;
-            blueStairsBlock.paint(g);
+            BlueSBlock.num = 5;
+            blueSBlock.paint(g);
             Panel.shapeEnd = false;
             tetrisController.checkRow1();
-            if (blueStairsBlock.onSide == false) {
+            if (blueSBlock.onSide == false) {
                 tetrisController.checkCols2(xNum);
             }
-            if (blueStairsBlock.onSide == true) {
+            if (blueSBlock.onSide == true) {
                 tetrisController.checkCols10(xNum);
             }
             if (reached == true) {
-                if (blueStairsBlock.onSide == true) {
+                if (blueSBlock.onSide == true) {
                     tetrisController.controler[yNum + 1][xNum] = TetrisController.colr;
                     tetrisController.controler[yNum][xNum] = TetrisController.colr;
                     tetrisController.controler[yNum + 1][xNum + 1] = TetrisController.colr;
                     tetrisController.controler[yNum][xNum - 1] = TetrisController.colr;
                 }
-                if (blueStairsBlock.onSide == false) {
+                if (blueSBlock.onSide == false) {
                     tetrisController.controler[yNum][xNum + 1] = TetrisController.colr;
                     tetrisController.controler[yNum + 1][xNum + 1] = TetrisController.colr;
                     tetrisController.controler[yNum + 1][xNum] = TetrisController.colr;
@@ -300,36 +300,36 @@ public class Panel extends JPanel implements KeyListener, ActionListener {
                 yellowSquareBlock.x4 = yellowSquareBlock.x4 - 20;
             }
 
-            if (greenStairBlock.onSide == true) {
-                if (greenStairBlock.x3 > 40) {
-                    greenStairBlock.x1 = greenStairBlock.x1 - 20;
-                    greenStairBlock.x2 = greenStairBlock.x2 - 20;
-                    greenStairBlock.x3 = greenStairBlock.x3 - 20;
-                    greenStairBlock.x4 = greenStairBlock.x4 - 20;
+            if (greenSBlock.onSide == true) {
+                if (greenSBlock.x3 > 40) {
+                    greenSBlock.x1 = greenSBlock.x1 - 20;
+                    greenSBlock.x2 = greenSBlock.x2 - 20;
+                    greenSBlock.x3 = greenSBlock.x3 - 20;
+                    greenSBlock.x4 = greenSBlock.x4 - 20;
                 }
             }
-            if (greenStairBlock.onSide == false) {
-                if (greenStairBlock.x3 > 40) {
-                    greenStairBlock.x1 = greenStairBlock.x1 - 20;
-                    greenStairBlock.x2 = greenStairBlock.x2 - 20;
-                    greenStairBlock.x3 = greenStairBlock.x3 - 20;
-                    greenStairBlock.x4 = greenStairBlock.x4 - 20;
+            if (greenSBlock.onSide == false) {
+                if (greenSBlock.x3 > 40) {
+                    greenSBlock.x1 = greenSBlock.x1 - 20;
+                    greenSBlock.x2 = greenSBlock.x2 - 20;
+                    greenSBlock.x3 = greenSBlock.x3 - 20;
+                    greenSBlock.x4 = greenSBlock.x4 - 20;
                 }
             }
-            if (blueStairsBlock.onSide == true) {
-                if (blueStairsBlock.x3 > 40) {
-                    blueStairsBlock.x1 = blueStairsBlock.x1 - 20;
-                    blueStairsBlock.x2 = blueStairsBlock.x2 - 20;
-                    blueStairsBlock.x3 = blueStairsBlock.x3 - 20;
-                    blueStairsBlock.x4 = blueStairsBlock.x4 - 20;
+            if (blueSBlock.onSide == true) {
+                if (blueSBlock.x3 > 40) {
+                    blueSBlock.x1 = blueSBlock.x1 - 20;
+                    blueSBlock.x2 = blueSBlock.x2 - 20;
+                    blueSBlock.x3 = blueSBlock.x3 - 20;
+                    blueSBlock.x4 = blueSBlock.x4 - 20;
                 }
             }
-            if (blueStairsBlock.onSide == false) {
-                if (blueStairsBlock.x3 > 20) {
-                    blueStairsBlock.x1 = blueStairsBlock.x1 - 20;
-                    blueStairsBlock.x2 = blueStairsBlock.x2 - 20;
-                    blueStairsBlock.x3 = blueStairsBlock.x3 - 20;
-                    blueStairsBlock.x4 = blueStairsBlock.x4 - 20;
+            if (blueSBlock.onSide == false) {
+                if (blueSBlock.x3 > 20) {
+                    blueSBlock.x1 = blueSBlock.x1 - 20;
+                    blueSBlock.x2 = blueSBlock.x2 - 20;
+                    blueSBlock.x3 = blueSBlock.x3 - 20;
+                    blueSBlock.x4 = blueSBlock.x4 - 20;
                 }
             }
         }
@@ -377,37 +377,37 @@ public class Panel extends JPanel implements KeyListener, ActionListener {
                 yellowSquareBlock.x3 = yellowSquareBlock.x3 + 20;
                 yellowSquareBlock.x4 = yellowSquareBlock.x4 + 20;
             }
-            if (greenStairBlock.onSide == true) {
-                if (greenStairBlock.x3 < 260) {
-                    greenStairBlock.x1 = greenStairBlock.x1 + 20;
-                    greenStairBlock.x2 = greenStairBlock.x2 + 20;
-                    greenStairBlock.x3 = greenStairBlock.x3 + 20;
-                    greenStairBlock.x4 = greenStairBlock.x4 + 20;
+            if (greenSBlock.onSide == true) {
+                if (greenSBlock.x3 < 260) {
+                    greenSBlock.x1 = greenSBlock.x1 + 20;
+                    greenSBlock.x2 = greenSBlock.x2 + 20;
+                    greenSBlock.x3 = greenSBlock.x3 + 20;
+                    greenSBlock.x4 = greenSBlock.x4 + 20;
                 }
             }
-            if (greenStairBlock.onSide == false) {
-                if (greenStairBlock.x3 < 280) {
-                    greenStairBlock.x1 = greenStairBlock.x1 + 20;
-                    greenStairBlock.x2 = greenStairBlock.x2 + 20;
-                    greenStairBlock.x3 = greenStairBlock.x3 + 20;
-                    greenStairBlock.x4 = greenStairBlock.x4 + 20;
+            if (greenSBlock.onSide == false) {
+                if (greenSBlock.x3 < 280) {
+                    greenSBlock.x1 = greenSBlock.x1 + 20;
+                    greenSBlock.x2 = greenSBlock.x2 + 20;
+                    greenSBlock.x3 = greenSBlock.x3 + 20;
+                    greenSBlock.x4 = greenSBlock.x4 + 20;
                 }
             }
 
-            if (blueStairsBlock.onSide == true) {
-                if (blueStairsBlock.x3 < 260) {
-                    blueStairsBlock.x1 = blueStairsBlock.x1 + 20;
-                    blueStairsBlock.x2 = blueStairsBlock.x2 + 20;
-                    blueStairsBlock.x3 = blueStairsBlock.x3 + 20;
-                    blueStairsBlock.x4 = blueStairsBlock.x4 + 20;
+            if (blueSBlock.onSide == true) {
+                if (blueSBlock.x3 < 260) {
+                    blueSBlock.x1 = blueSBlock.x1 + 20;
+                    blueSBlock.x2 = blueSBlock.x2 + 20;
+                    blueSBlock.x3 = blueSBlock.x3 + 20;
+                    blueSBlock.x4 = blueSBlock.x4 + 20;
                 }
             }
-            if (blueStairsBlock.onSide == false) {
-                if (blueStairsBlock.x3 < 260) {
-                    blueStairsBlock.x1 = blueStairsBlock.x1 + 20;
-                    blueStairsBlock.x2 = blueStairsBlock.x2 + 20;
-                    blueStairsBlock.x3 = blueStairsBlock.x3 + 20;
-                    blueStairsBlock.x4 = blueStairsBlock.x4 + 20;
+            if (blueSBlock.onSide == false) {
+                if (blueSBlock.x3 < 260) {
+                    blueSBlock.x1 = blueSBlock.x1 + 20;
+                    blueSBlock.x2 = blueSBlock.x2 + 20;
+                    blueSBlock.x3 = blueSBlock.x3 + 20;
+                    blueSBlock.x4 = blueSBlock.x4 + 20;
                 }
             }
         }
@@ -418,16 +418,16 @@ public class Panel extends JPanel implements KeyListener, ActionListener {
 
                     cyanBarBlock.onSide = false;
                     yellowSquareBlock.onSide = false;
-                    greenStairBlock.onSide = false;
-                    blueStairsBlock.onSide = false;
+                    greenSBlock.onSide = false;
+                    blueSBlock.onSide = false;
                     cyanBarBlock.offSet = cyanBarBlock.y2;
                     cyanBarBlock.offSet2 = cyanBarBlock.x2;
-                    greenStairBlock.offSet = greenStairBlock.y3;
-                    greenStairBlock.offSet2 = greenStairBlock.x3;
-                    blueStairsBlock.offSet = blueStairsBlock.y3;
-                    blueStairsBlock.offSet2 = blueStairsBlock.x3;
-                    if (greenStairBlock.onSide == false) {
-                        greenStairBlock.shape();
+                    greenSBlock.offSet = greenSBlock.y3;
+                    greenSBlock.offSet2 = greenSBlock.x3;
+                    blueSBlock.offSet = blueSBlock.y3;
+                    blueSBlock.offSet2 = blueSBlock.x3;
+                    if (greenSBlock.onSide == false) {
+                        greenSBlock.shape();
                     }
                     if (cyanBarBlock.onSide == false) {
                         cyanBarBlock.bar();
@@ -435,8 +435,8 @@ public class Panel extends JPanel implements KeyListener, ActionListener {
                     if (cyanBarBlock.onSide == false) {
                         yellowSquareBlock.square();
                     }
-                    if (blueStairsBlock.onSide == false) {
-                        blueStairsBlock.shape();
+                    if (blueSBlock.onSide == false) {
+                        blueSBlock.shape();
                     }
                 }
                 System.out.println(spin);
@@ -445,25 +445,25 @@ public class Panel extends JPanel implements KeyListener, ActionListener {
                 if (Panel.shapeEnd == false) {
                     cyanBarBlock.onSide = true;
                     yellowSquareBlock.onSide = true;
-                    greenStairBlock.onSide = true;
-                    blueStairsBlock.onSide = true;
+                    greenSBlock.onSide = true;
+                    blueSBlock.onSide = true;
                     cyanBarBlock.offSet = cyanBarBlock.y2;
                     cyanBarBlock.offSet2 = cyanBarBlock.x2;
-                    greenStairBlock.offSet = greenStairBlock.y3;
-                    greenStairBlock.offSet2 = greenStairBlock.x3;
-                    blueStairsBlock.offSet = blueStairsBlock.y3;
-                    blueStairsBlock.offSet2 = blueStairsBlock.x3;
+                    greenSBlock.offSet = greenSBlock.y3;
+                    greenSBlock.offSet2 = greenSBlock.x3;
+                    blueSBlock.offSet = blueSBlock.y3;
+                    blueSBlock.offSet2 = blueSBlock.x3;
                     if (cyanBarBlock.onSide == true) {
                         cyanBarBlock.barOnItsSide();
                     }
                     if (cyanBarBlock.onSide == true) {
                         yellowSquareBlock.square();
                     }
-                    if (greenStairBlock.onSide == true) {
-                        greenStairBlock.shapeOnItsSide();
+                    if (greenSBlock.onSide == true) {
+                        greenSBlock.shapeOnItsSide();
                     }
-                    if (blueStairsBlock.onSide == true) {
-                        blueStairsBlock.shapeOnItsSide();
+                    if (blueSBlock.onSide == true) {
+                        blueSBlock.shapeOnItsSide();
                     }
                 }
             }
@@ -556,37 +556,37 @@ public class Panel extends JPanel implements KeyListener, ActionListener {
                 yellowSquareBlock.y3 = yellowSquareBlock.y3 + 1000;
                 yellowSquareBlock.y4 = yellowSquareBlock.y4 + 1000;
             }
-            if (greenStairBlock.onSide == true) {
-                if (greenStairBlock.y3 < 260) {
-                    greenStairBlock.y1 = greenStairBlock.y1 + 1000;
-                    greenStairBlock.y2 = greenStairBlock.y2 + 1000;
-                    greenStairBlock.y3 = greenStairBlock.y3 + 1000;
-                    greenStairBlock.y4 = greenStairBlock.y4 + 1000;
+            if (greenSBlock.onSide == true) {
+                if (greenSBlock.y3 < 260) {
+                    greenSBlock.y1 = greenSBlock.y1 + 1000;
+                    greenSBlock.y2 = greenSBlock.y2 + 1000;
+                    greenSBlock.y3 = greenSBlock.y3 + 1000;
+                    greenSBlock.y4 = greenSBlock.y4 + 1000;
                 }
             }
-            if (greenStairBlock.onSide == false) {
-                if (greenStairBlock.y3 < 280) {
-                    greenStairBlock.y1 = greenStairBlock.y1 + 1000;
-                    greenStairBlock.y2 = greenStairBlock.y2 + 1000;
-                    greenStairBlock.y3 = greenStairBlock.y3 + 1000;
-                    greenStairBlock.y4 = greenStairBlock.y4 + 1000;
+            if (greenSBlock.onSide == false) {
+                if (greenSBlock.y3 < 280) {
+                    greenSBlock.y1 = greenSBlock.y1 + 1000;
+                    greenSBlock.y2 = greenSBlock.y2 + 1000;
+                    greenSBlock.y3 = greenSBlock.y3 + 1000;
+                    greenSBlock.y4 = greenSBlock.y4 + 1000;
                 }
             }
 
-            if (blueStairsBlock.onSide == true) {
-                if (blueStairsBlock.y3 < 260) {
-                    blueStairsBlock.y1 = blueStairsBlock.y1 + 1000;
-                    blueStairsBlock.y2 = blueStairsBlock.y2 + 1000;
-                    blueStairsBlock.y3 = blueStairsBlock.y3 + 1000;
-                    blueStairsBlock.y4 = blueStairsBlock.y4 + 1000;
+            if (blueSBlock.onSide == true) {
+                if (blueSBlock.y3 < 260) {
+                    blueSBlock.y1 = blueSBlock.y1 + 1000;
+                    blueSBlock.y2 = blueSBlock.y2 + 1000;
+                    blueSBlock.y3 = blueSBlock.y3 + 1000;
+                    blueSBlock.y4 = blueSBlock.y4 + 1000;
                 }
             }
-            if (blueStairsBlock.onSide == false) {
-                if (blueStairsBlock.y3 < 260) {
-                    blueStairsBlock.y1 = blueStairsBlock.y1 + 1000;
-                    blueStairsBlock.y2 = blueStairsBlock.y2 + 1000;
-                    blueStairsBlock.y3 = blueStairsBlock.y3 + 1000;
-                    blueStairsBlock.y4 = blueStairsBlock.y4 + 1000;
+            if (blueSBlock.onSide == false) {
+                if (blueSBlock.y3 < 260) {
+                    blueSBlock.y1 = blueSBlock.y1 + 1000;
+                    blueSBlock.y2 = blueSBlock.y2 + 1000;
+                    blueSBlock.y3 = blueSBlock.y3 + 1000;
+                    blueSBlock.y4 = blueSBlock.y4 + 1000;
                 }
             }
         }

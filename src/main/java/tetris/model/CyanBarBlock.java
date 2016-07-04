@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 /**
  * Created by Dominika on 2016-07-03.
  */
-public class CyanBarBlock implements ActionListener {
+public class CyanBarBlock extends Block implements ActionListener {
 
     public int x1, x2, x3;
     public int y1, y2, y3;
@@ -28,6 +28,11 @@ public class CyanBarBlock implements ActionListener {
         time = new Timer(50, this);
         time.stop();
         coordinates();
+    }
+
+    @Override
+    public Block getBlock() {
+        return this;
     }
 
     public void coordinates() {

@@ -12,7 +12,7 @@ import java.awt.event.ActionListener;
 /**
  * Created by Dominika on 2016-07-03.
  */
-public class YellowSquareBlock implements ActionListener {
+public class YellowSquareBlock extends Block implements ActionListener {
 
     public int x1, x2, x3, x4;
     public int y1, y2, y3, y4;
@@ -28,6 +28,11 @@ public class YellowSquareBlock implements ActionListener {
         coordinates();
         time = new Timer(30, this);
         time.stop();
+    }
+
+    @Override
+    public Block getBlock() {
+        return this;
     }
 
     public void paint(Graphics g) {
