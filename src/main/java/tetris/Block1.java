@@ -29,7 +29,6 @@ public class Block1 implements ActionListener {
     }
 
     public void coordinates() {
-
         //onSide=true;
         x1 = 120;
         x2 = 140;
@@ -45,7 +44,6 @@ public class Block1 implements ActionListener {
         if (Panel.spin == 3) {
             Panel.spin = 0;
         }
-
         if (onSide == false) {
             this.onSide = true;
         }
@@ -55,9 +53,7 @@ public class Block1 implements ActionListener {
 
     public void paint(Graphics g) {
         if (onSide == false) {
-
             this.dropDownTo = Panel.dropDownTo;
-
             if (y1 >= dropDownTo + 20) {
                 Panel.shapeEnd = true;
                 Panel.num = 2;
@@ -83,7 +79,6 @@ public class Block1 implements ActionListener {
         }
         g.setColor(Color.cyan);
         //Controler.colr = 1;
-
         g.fillRect(x1, y1, 20, 20);
         g.fillRect(x2, y2, 20, 20);
         g.fillRect(x3, y3, 20, 20);
@@ -98,7 +93,6 @@ public class Block1 implements ActionListener {
         y1 = offSet + 20;
         y2 = offSet;
         y3 = offSet - 20;
-
     }
 
     public void barOnItsSide() {
@@ -200,13 +194,11 @@ public class Block1 implements ActionListener {
                     break;
             }
         }
-
     }
 
     public void checkRow() {
 
         switch (y1) {
-
             case 40:
                 Panel.yNum = 2;
                 break;
@@ -283,10 +275,8 @@ public class Block1 implements ActionListener {
                 Panel.yNum = 26;
                 break;
         }
-
     }
 
     public void actionPerformed(ActionEvent e) {
-
     }
 }

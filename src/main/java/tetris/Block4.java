@@ -26,12 +26,10 @@ public class Block4 implements ActionListener {
     }
 
     public void coordinates() {
-
         x1 = 140;
         x2 = 160;
         x3 = 140;
         x4 = 120;
-
         y1 = 40;
         y2 = 40;
         y3 = 60;
@@ -62,9 +60,7 @@ public class Block4 implements ActionListener {
                 Panel.num = 5;
                 coordinates();
             }
-
         }
-
         if (y1 < this.dropDownTo) {
             Panel.reached = false;
             y1 = y1 + 1;
@@ -75,14 +71,12 @@ public class Block4 implements ActionListener {
         if (y1 >= this.dropDownTo) {
             Panel.reached = true;
         }
-
         g.fillRect(x1, y1, 20, 20);
         g.fillRect(x2, y2, 20, 20);
         g.fillRect(x3, y3, 20, 20);
         g.fillRect(x4, y4, 20, 20);
         checkColumn();
         checkRow();
-
     }
 
     public void shapeOnItsSide() {
@@ -110,10 +104,8 @@ public class Block4 implements ActionListener {
     }
 
     public void checkColumn() {
-
         if (onSide == true) {
             switch (x3) {
-
                 case 40:
                     Panel.xNum = 2;
                     break;
@@ -150,12 +142,10 @@ public class Block4 implements ActionListener {
                 case 260:
                     Panel.xNum = 13;
                     break;
-
             }
         }
         if (onSide == false) {
             switch (x3) {
-
                 case 40:
                     Panel.xNum = 2;
                     break;
@@ -197,13 +187,10 @@ public class Block4 implements ActionListener {
                     break;
             }
         }
-
     }
 
     public void checkRow() {
-
         switch (y1) {
-
             case 40:
                 Panel.yNum = 2;
                 break;
@@ -280,11 +267,9 @@ public class Block4 implements ActionListener {
                 Panel.yNum = 26;
                 break;
         }
-
     }
 
     public void actionPerformed(ActionEvent e) {
-
     }
 }
 

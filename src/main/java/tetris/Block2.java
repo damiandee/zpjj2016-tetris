@@ -20,7 +20,6 @@ public class Block2 implements ActionListener {
     Timer time;
 
     public Block2() {
-
         coordinates();
         time = new Timer(40, this);
         time.stop();
@@ -28,12 +27,10 @@ public class Block2 implements ActionListener {
 
     public void coordinates() {
         this.onSide = 1;
-
         x1 = 120;
         x2 = 120;
         x3 = 120;
         x4 = 140;
-
         y1 = 100;
         y2 = 120;
         y3 = 140;
@@ -81,7 +78,6 @@ public class Block2 implements ActionListener {
                 coordinates();
             }
         }
-
         if (y1 < dropDownTo) {
             Panel.reached = false;
             y1 = y1 + 1;
@@ -98,11 +94,9 @@ public class Block2 implements ActionListener {
         g.fillRect(x4, y4, 20, 20);
         checkColumn();
         checkRow();
-
     }
 
     public void shapeTeeRight() {
-
         x1 = offSet2;
         x2 = offSet2;
         x3 = offSet2;
@@ -111,11 +105,9 @@ public class Block2 implements ActionListener {
         y2 = offSet;
         y3 = offSet + 20;
         y4 = offSet;
-
     }
 
     public void shapeTeeBottom() {
-
         x1 = offSet2 - 20;
         x2 = offSet2;
         x3 = offSet2;
@@ -124,11 +116,9 @@ public class Block2 implements ActionListener {
         y2 = offSet;
         y3 = offSet + 20;
         y4 = offSet;
-
     }
 
     public void shapeTeeLeft() {
-
         x1 = offSet2;
         x2 = offSet2;
         x3 = offSet2;
@@ -137,11 +127,9 @@ public class Block2 implements ActionListener {
         y2 = offSet;
         y3 = offSet - 20;
         y4 = offSet;
-
     }
 
     public void shapeTeeUp() {
-
         x1 = offSet2;
         x2 = offSet2;
         x3 = offSet2 + 20;
@@ -150,11 +138,9 @@ public class Block2 implements ActionListener {
         y2 = offSet;
         y3 = offSet;
         y4 = offSet;
-
     }
 
     public void checkColumn() {
-
         switch (x3) {
             case 20:
                 Panel.xNum = 1;
@@ -198,15 +184,11 @@ public class Block2 implements ActionListener {
             case 280:
                 Panel.xNum = 14;
                 break;
-
         }
-
     }
 
     public void checkRow() {
-
         switch (y1) {
-
             case 40:
                 Panel.yNum = 2;
                 break;
@@ -283,10 +265,8 @@ public class Block2 implements ActionListener {
                 Panel.yNum = 26;
                 break;
         }
-
     }
 
     public void actionPerformed(ActionEvent arg0) {
-
     }
 }

@@ -16,7 +16,6 @@ public class Frame extends JFrame {
     int y;
 
     public Frame() throws InterruptedException {
-
         dimension = Toolkit.getDefaultToolkit().getScreenSize();
         x = (int) dimension.getWidth() * 4 / 12;
         y = (int) dimension.getHeight() * 2 / 12;

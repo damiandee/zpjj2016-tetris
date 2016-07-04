@@ -29,13 +29,11 @@ public class Block3 implements ActionListener {
     public void paint(Graphics g) {
         g.setColor(Color.yellow);
         //Controler.colr = 3;
-
         this.dropDownTo = Panel.dropDownTo;
         if (y1 >= this.dropDownTo) {
             Panel.num = 4;
             coordinates();
         }
-
         if (y1 < this.dropDownTo) {
             Panel.reached = false;
             y1 = y1 + 1;
@@ -43,16 +41,13 @@ public class Block3 implements ActionListener {
             y3 = y3 + 1;
             y4 = y4 + 1;
         }
-
         if (y1 >= this.dropDownTo) {
             Panel.reached = true;
         }
-
         g.fillRect(x1, y1, 20, 20);
         g.fillRect(x2, y2, 20, 20);
         g.fillRect(x3, y3, 20, 20);
         g.fillRect(x4, y4, 20, 20);
-
         checkColumn();
         checkRow();
 
@@ -78,9 +73,7 @@ public class Block3 implements ActionListener {
     }
 
     public void checkColumn() {
-
         switch (x3) {
-
             case 40:
                 Panel.xNum = 2;
                 break;
@@ -121,13 +114,10 @@ public class Block3 implements ActionListener {
                 Panel.xNum = 14;
                 break;
         }
-
     }
 
     public void checkRow() {
-
         switch (y1) {
-
             case 40:
                 Panel.yNum = 2;
                 break;
@@ -204,11 +194,9 @@ public class Block3 implements ActionListener {
                 Panel.yNum = 26;
                 break;
         }
-
     }
-    
-    public void actionPerformed(ActionEvent e) {
 
+    public void actionPerformed(ActionEvent e) {
     }
 }
 

@@ -54,7 +54,6 @@ public class Block5 implements ActionListener {
                 Panel.num = 1;
                 coordinates();
             }
-
         }
         if (onSide == true) {
             this.dropDownTo = Panel.dropDownTo;
@@ -71,7 +70,6 @@ public class Block5 implements ActionListener {
             y2 = y2 + 1;
             y3 = y3 + 1;
             y4 = y4 + 1;
-
         }
         if (y1 >= this.dropDownTo) {
             Panel.reached = true;
@@ -81,7 +79,6 @@ public class Block5 implements ActionListener {
         //Controler.col=x3;
         //Controler.row=this.dropDownTo;
         int nums = 0;
-
         g.fillRect(x1, y1, 20, 20);
         g.fillRect(x2, y2, 20, 20);
         g.fillRect(x3, y3, 20, 20);
@@ -115,10 +112,8 @@ public class Block5 implements ActionListener {
     }
 
     public void checkColumn() {
-
         if (onSide == true) {
             switch (x3) {
-
                 case 40:
                     Panel.xNum = 2;
                     break;
@@ -155,12 +150,10 @@ public class Block5 implements ActionListener {
                 case 260:
                     Panel.xNum = 13;
                     break;
-
             }
         }
         if (onSide == false) {
             switch (x3) {
-
                 case 20:
                     Panel.xNum = 1;
                     break;
@@ -205,13 +198,10 @@ public class Block5 implements ActionListener {
                     break;
             }
         }
-
     }
 
     public void checkRow() {
-
         switch (y1) {
-
             case 40:
                 Panel.yNum = 2;
                 break;
@@ -288,11 +278,8 @@ public class Block5 implements ActionListener {
                 Panel.yNum = 26;
                 break;
         }
-
     }
 
     public void actionPerformed(ActionEvent e) {
-
     }
-
 }

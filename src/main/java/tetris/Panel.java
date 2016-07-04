@@ -29,7 +29,6 @@ public class Panel extends JPanel implements KeyListener, ActionListener {
     Timer time;
 
     public Panel() throws InterruptedException {
-
         //con = new Controler();
         block1 = new Block1();
         block2 = new Block2();
@@ -37,10 +36,8 @@ public class Panel extends JPanel implements KeyListener, ActionListener {
         block4 = new Block4();
         block5 = new Block5();
         spin = 0;
-
         this.setSize(350, 300);
         this.setVisible(true);
-
         addKeyListener(this);
         this.setFocusable(true);
         this.requestFocus();
@@ -53,7 +50,6 @@ public class Panel extends JPanel implements KeyListener, ActionListener {
     }
 
     public void keyPressed(KeyEvent e) {
-
         if (e.getKeyCode() == KeyEvent.VK_LEFT) {
             if (block1.onSide == false) {
                 if (block1.x3 > 20) {
@@ -140,7 +136,6 @@ public class Panel extends JPanel implements KeyListener, ActionListener {
                     block5.x4 = block5.x4 - 20;
                 }
             }
-
         }
         if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
             if (block1.x3 < 261) {
@@ -219,11 +214,9 @@ public class Panel extends JPanel implements KeyListener, ActionListener {
                     block5.x4 = block5.x4 + 20;
                 }
             }
-
         }
         if (e.getKeyCode() == KeyEvent.VK_UP) {
             ++spin;
-
             if (spin == 1 || spin == 3) {
                 if (Panel.shapeEnd == false) {
 
@@ -237,7 +230,6 @@ public class Panel extends JPanel implements KeyListener, ActionListener {
                     block4.offSet2 = block4.x3;
                     block5.offSet = block5.y3;
                     block5.offSet2 = block5.x3;
-
                     if (block4.onSide == false) {
                         block4.shape();
                     }
@@ -278,7 +270,6 @@ public class Panel extends JPanel implements KeyListener, ActionListener {
                         block5.shapeOnItsSide();
                     }
                 }
-
             }
             System.out.println(" spin : " + spin);
             //block2.onSide=1;
@@ -299,7 +290,6 @@ public class Panel extends JPanel implements KeyListener, ActionListener {
                 firstShape = false;  //bug fix
                 if (Panel.shapeEnd == false) {
                     block2.onSide = 2;
-
                     block2.offSet = block2.y2;
                     block2.offSet2 = block2.x2;
                     //block2.shapeTeeRight();
@@ -310,11 +300,9 @@ public class Panel extends JPanel implements KeyListener, ActionListener {
 
                 if (Panel.shapeEnd == false) {
                     block2.onSide = 3;
-
                     block2.offSet = block2.y2;
                     block2.offSet2 = block2.x2;
                     block2.shapeTeeBottom();
-
                 }
             }
             if (spin == 4 && spin != 2) {
@@ -330,16 +318,12 @@ public class Panel extends JPanel implements KeyListener, ActionListener {
     }
 
     public void keyReleased(KeyEvent e) {
-
     }
 
     public void keyTyped(KeyEvent e) {
-
     }
 
     public void actionPerformed(ActionEvent e) {
-
     }
-
 }
 
