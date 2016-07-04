@@ -23,6 +23,7 @@ public class Panel extends JPanel implements KeyListener, ActionListener {
 
     public int iPlus20, jPlus20;
 
+    //OrangeLeftLBlock orangeLeftLBlock;
     CyanBarBlock cyanBarBlock;
     RedCrossBlock redCrossBlock;
     YellowSquareBlock yellowSquareBlock;
@@ -33,6 +34,7 @@ public class Panel extends JPanel implements KeyListener, ActionListener {
 
     public Panel() throws InterruptedException {
         tetrisController = new TetrisController();
+        //orangeLeftLBlock = new OrangeLeftLBlock();
         cyanBarBlock = new CyanBarBlock();
         redCrossBlock = new RedCrossBlock();
         yellowSquareBlock = new YellowSquareBlock();
@@ -51,7 +53,7 @@ public class Panel extends JPanel implements KeyListener, ActionListener {
     public void paint(Graphics g) {
         g.setColor(Color.black);
         g.fillRect(0, 0, 350, 560);
-        for (int i = 0; i < 375; i++) {
+        for (int i = 0; i < 3750; i++) {
             System.out.println();
         }
         for (int i = 1; i < 27; i++) {
