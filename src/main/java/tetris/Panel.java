@@ -14,7 +14,7 @@ public class Panel extends JPanel implements KeyListener, ActionListener {
 
     private static final long serialVersionUID = 1L;
 
-    //Controler con;
+    Controler con;
     public static int spin, num = 1, yNum = 1, xNum = 1, offSet, offSet2, dropDownTo = 500;
     public static boolean shapeEnd, reached = false, onSide = true, firstShape = false;
 
@@ -29,7 +29,7 @@ public class Panel extends JPanel implements KeyListener, ActionListener {
     Timer time;
 
     public Panel() throws InterruptedException {
-        //con = new Controler();
+        con = new Controler();
         block1 = new Block1();
         block2 = new Block2();
         block3 = new Block3();
@@ -46,7 +46,198 @@ public class Panel extends JPanel implements KeyListener, ActionListener {
     }
 
     public void paint(Graphics g) {
-        //TODO
+        g.setColor(Color.black);
+        g.fillRect(0, 0, 350, 560);
+        for (int i = 0; i < 375; i++) {
+            System.out.println();
+        }
+        for (int i = 1; i < 27; i++) {
+            iPlus20 = i * 20;
+            for (int j = 1; j < 15; j++) {
+                jPlus20 = j * 20;
+
+                if (con.controler[i][j] == 0) {
+                    g.setColor(Color.white);
+                }
+                if (con.controler[i][j] == 1) {
+                    g.setColor(Color.cyan);
+                }
+                if (con.controler[i][j] == 2) {
+                    g.setColor(Color.red);
+                }
+                if (con.controler[i][j] == 3) {
+                    g.setColor(Color.yellow);
+                }
+                if (con.controler[i][j] == 4) {
+                    g.setColor(Color.green);
+                }
+                if (con.controler[i][j] == 5) {
+                    g.setColor(Color.blue);
+                }
+                if (con.controler[i][j] == 100) {
+                    g.setColor(Color.white);
+                }
+                g.fillRect(jPlus20, iPlus20, 20, 20);
+            }
+        }
+
+        if (num == 1) {
+            Block1.num = 1;
+            block1.paint(g);
+            Panel.shapeEnd = false;
+            con.checkRow1();
+            if (block1.onSide == false) {
+                con.checkCols7(xNum);
+            }
+            if (block1.onSide == true) {
+                con.checkCols4(xNum);
+            }
+
+            if (reached == true) {
+
+                if (block1.onSide == false) {
+                    con.controler[yNum - 2][xNum] = Controler.colr;
+                    con.controler[yNum - 1][xNum] = Controler.colr;
+                    con.controler[yNum][xNum] = Controler.colr;
+                }
+
+                if (block1.onSide == true) {
+                    con.controler[yNum][xNum - 2] = Controler.colr;
+                    con.controler[yNum][xNum - 1] = Controler.colr;
+                    con.controler[yNum][xNum] = Controler.colr;
+                }
+
+            }
+        }
+        if (num == 2) {
+            Block2.num = 2;
+            block2.paint(g);
+            Panel.shapeEnd = false;
+            con.checkRow1();
+            if (block2.onSide == 1) {
+                con.checkCols2(xNum);
+            }
+            if (block2.onSide == 2) {
+                con.checkCols4(xNum);
+            }
+            if (block2.onSide == 3) {
+                con.checkCols6(xNum);
+            }
+            if (block2.onSide == 4) {
+                con.checkCols3(xNum);
+            }
+            //con.controler[1][9]=Controler.colr;
+            if (reached == true) {
+                if (block2.onSide == 1) {
+
+                    con.controler[yNum][xNum] = Controler.colr;
+                    con.controler[yNum + 1][xNum] = Controler.colr;
+                    con.controler[yNum + 2][xNum] = Controler.colr;
+                    con.controler[yNum + 1][xNum + 1] = Controler.colr;
+                }
+
+                if (block2.onSide == 2) {
+                    con.controler[yNum + 1][xNum - 1] = Controler.colr;
+                    con.controler[yNum + 1][xNum] = Controler.colr;
+                    con.controler[yNum + 1][xNum - 2] = Controler.colr;
+                    con.controler[yNum][xNum - 1] = Controler.colr;
+                }
+
+                if (block2.onSide == 3) {
+                    con.controler[yNum][xNum] = Controler.colr;
+                    con.controler[yNum][xNum + 1] = Controler.colr;
+                    con.controler[yNum][xNum - 1] = Controler.colr;
+                    con.controler[yNum + 1][xNum] = Controler.colr;
+                }
+
+                if (block2.onSide == 4) {
+                    con.controler[yNum - 2][xNum] = Controler.colr;
+                    con.controler[yNum - 1][xNum] = Controler.colr;
+                    con.controler[yNum][xNum] = Controler.colr;
+                    con.controler[yNum - 1][xNum - 1] = Controler.colr;
+                }
+            }
+        }
+        if (num == 3) {
+            Block3.num = 3;
+            block3.paint(g);
+            Panel.shapeEnd = false;
+            con.checkRow1();
+            con.checkCols8(xNum);
+            //con.controler[1][9]=Controler.colr;
+            if (reached == true) {
+                if (block3.onSide == true) {
+                    con.controler[yNum][xNum - 1] = Controler.colr;
+                    con.controler[yNum][xNum] = Controler.colr;
+                    con.controler[yNum + 1][xNum - 1] = Controler.colr;
+                    con.controler[yNum + 1][xNum] = Controler.colr;
+                }
+                if (block3.onSide == false) {
+                    con.controler[yNum][xNum - 1] = Controler.colr;
+                    con.controler[yNum][xNum] = Controler.colr;
+                    con.controler[yNum + 1][xNum - 1] = Controler.colr;
+                    con.controler[yNum + 1][xNum] = Controler.colr;
+                }
+            }
+        }
+        if (num == 4) {
+            Block4.num = 4;
+            block4.paint(g);
+            Panel.shapeEnd = false;
+            con.checkRow1();
+            if (block4.onSide == false) {
+                con.checkCols9(xNum);
+            }
+            if (block4.onSide == true) {
+                con.checkCols1(xNum);
+            }
+            //con.controler[1][9]=Controler.colr;
+            if (reached == true) {
+                if (block4.onSide == true) {
+                    con.controler[yNum + 1][xNum] = Controler.colr;
+                    con.controler[yNum][xNum] = Controler.colr;
+                    con.controler[yNum][xNum + 1] = Controler.colr;
+                    con.controler[yNum + 1][xNum - 1] = Controler.colr;
+                }
+                if (block4.onSide == false) {
+                    con.controler[yNum][xNum - 1] = Controler.colr;
+                    con.controler[yNum + 1][xNum - 1] = Controler.colr;
+                    con.controler[yNum + 1][xNum] = Controler.colr;
+                    con.controler[yNum + 2][xNum] = Controler.colr;
+                }
+            }
+        }
+        if (num == 5) {
+            Block5.num = 5;
+            block5.paint(g);
+            Panel.shapeEnd = false;
+            con.checkRow1();
+            if (block5.onSide == false) {
+                con.checkCols2(xNum);
+            }
+            if (block5.onSide == true) {
+                con.checkCols10(xNum);
+            }
+            if (reached == true) {
+                if (block5.onSide == true) {
+                    con.controler[yNum + 1][xNum] = Controler.colr;
+                    con.controler[yNum][xNum] = Controler.colr;
+                    con.controler[yNum + 1][xNum + 1] = Controler.colr;
+                    con.controler[yNum][xNum - 1] = Controler.colr;
+                }
+                if (block5.onSide == false) {
+                    con.controler[yNum][xNum + 1] = Controler.colr;
+                    con.controler[yNum + 1][xNum + 1] = Controler.colr;
+                    con.controler[yNum + 1][xNum] = Controler.colr;
+                    con.controler[yNum + 2][xNum] = Controler.colr;
+                }
+            }
+        }
+
+        repaint();
+
+        g.dispose();
+
     }
 
     public void keyPressed(KeyEvent e) {
@@ -275,7 +466,7 @@ public class Panel extends JPanel implements KeyListener, ActionListener {
             //block2.onSide=1;
             if (firstShape == true) {
                 spin = 2;
-            } //bug fix
+            }
             if (spin == 1 && spin != 3) {
                 System.out.println("   inside it now!");
                 if (Panel.shapeEnd == false) {
@@ -315,6 +506,86 @@ public class Panel extends JPanel implements KeyListener, ActionListener {
                 }
             }
         }
+
+        if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+            if (block1.y3 < 261) {
+                block1.y1 = block1.y1 + 1000;
+                block1.y2 = block1.y2 + 1000;
+                block1.y3 = block1.y3 + 1000;
+            }
+            if (block2.onSide == 1) {
+                if (block2.y3 < 260) {
+                    block2.y1 = block2.y1 + 1000;
+                    block2.y2 = block2.y2 + 1000;
+                    block2.y3 = block2.y3 + 1000;
+                    block2.y4 = block2.y4 + 1000;
+                }
+            }
+            if (block2.onSide == 2) {
+                if (block2.y3 < 280) {
+                    block2.y1 = block2.y1 + 1000;
+                    block2.y2 = block2.y2 + 1000;
+                    block2.y3 = block2.y3 + 1000;
+                    block2.y4 = block2.y4 + 1000;
+                }
+            }
+            if (block2.onSide == 3) {
+                if (block2.y3 < 260) {
+                    block2.y1 = block2.y1 + 1000;
+                    block2.y2 = block2.y2 + 1000;
+                    block2.y3 = block2.y3 + 1000;
+                    block2.y4 = block2.y4 + 1000;
+                }
+            }
+            if (block2.onSide == 4) {
+                if (block2.y3 < 280) {
+                    block2.y1 = block2.y1 + 1000;
+                    block2.y2 = block2.y2 + 1000;
+                    block2.y3 = block2.y3 + 1000;
+                    block2.y4 = block2.y4 + 1000;
+                }
+            }
+            if (block3.y3 < 261) {
+                block3.y1 = block3.y1 + 1000;
+                block3.y2 = block3.y2 + 1000;
+                block3.y3 = block3.y3 + 1000;
+                block3.y4 = block3.y4 + 1000;
+            }
+            if (block4.onSide == true) {
+                if (block4.y3 < 260) {
+                    block4.y1 = block4.y1 + 1000;
+                    block4.y2 = block4.y2 + 1000;
+                    block4.y3 = block4.y3 + 1000;
+                    block4.y4 = block4.y4 + 1000;
+                }
+            }
+            if (block4.onSide == false) {
+                if (block4.y3 < 280) {
+                    block4.y1 = block4.y1 + 1000;
+                    block4.y2 = block4.y2 + 1000;
+                    block4.y3 = block4.y3 + 1000;
+                    block4.y4 = block4.y4 + 1000;
+                }
+            }
+
+            if (block5.onSide == true) {
+                if (block5.y3 < 260) {
+                    block5.y1 = block5.y1 + 1000;
+                    block5.y2 = block5.y2 + 1000;
+                    block5.y3 = block5.y3 + 1000;
+                    block5.y4 = block5.y4 + 1000;
+                }
+            }
+            if (block5.onSide == false) {
+                if (block5.y3 < 260) {
+                    block5.y1 = block5.y1 + 1000;
+                    block5.y2 = block5.y2 + 1000;
+                    block5.y3 = block5.y3 + 1000;
+                    block5.y4 = block5.y4 + 1000;
+                }
+            }
+        }
+
     }
 
     public void keyReleased(KeyEvent e) {

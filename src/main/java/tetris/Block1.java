@@ -78,7 +78,7 @@ public class Block1 implements ActionListener {
             Panel.reached = true;
         }
         g.setColor(Color.cyan);
-        //Controler.colr = 1;
+        Controler.colr = 1;
         g.fillRect(x1, y1, 20, 20);
         g.fillRect(x2, y2, 20, 20);
         g.fillRect(x3, y3, 20, 20);

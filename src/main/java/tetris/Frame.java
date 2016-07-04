@@ -10,22 +10,29 @@ import java.awt.*;
 
 public class Frame extends JFrame {
 
-    //private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
+    public Panel panel;
     public Dimension dimension;
-    int x;
-    int y;
+    int locX;
+    int locY;
 
     public Frame() throws InterruptedException {
+
         dimension = Toolkit.getDefaultToolkit().getScreenSize();
-        x = (int) dimension.getWidth() * 4 / 12;
-        y = (int) dimension.getHeight() * 2 / 12;
+        locX = (int) dimension.getWidth() * 4 / 12;
+        locY = (int) dimension.getHeight() * 2 / 12;
+        panel = new Panel();
         this.setTitle("TETRIS");
-        this.setSize(400, 660);
-        this.setLocation(x, y);
+        this.setSize(326, 585);
+        this.setLocation(locX, locY);
+
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(true);
         this.setFocusable(true);
         this.setResizable(false);
+        this.add(panel);
+        addKeyListener(panel);
+
     }
 
     public static void main(String[] args) throws InterruptedException {

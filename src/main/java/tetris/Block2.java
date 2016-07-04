@@ -45,7 +45,7 @@ public class Block2 implements ActionListener {
             Panel.firstShape = true;
         }
         g.setColor(Color.red);
-        //Controler.colr = 2;
+        Controler.colr = 2;
         if (onSide == 1) {
             this.dropDownTo = Panel.dropDownTo - 20;
             if (y1 >= dropDownTo) {

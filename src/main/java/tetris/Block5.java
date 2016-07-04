@@ -75,7 +75,7 @@ public class Block5 implements ActionListener {
             Panel.reached = true;
         }
         g.setColor(Color.blue);
-        //Controler.colr = 5;
+        Controler.colr = 5;
         //Controler.col=x3;
         //Controler.row=this.dropDownTo;
         int nums = 0;

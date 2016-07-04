@@ -28,7 +28,7 @@ public class Block3 implements ActionListener {
 
     public void paint(Graphics g) {
         g.setColor(Color.yellow);
-        //Controler.colr = 3;
+        Controler.colr = 3;
         this.dropDownTo = Panel.dropDownTo;
         if (y1 >= this.dropDownTo) {
             Panel.num = 4;

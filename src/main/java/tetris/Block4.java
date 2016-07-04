@@ -44,7 +44,7 @@ public class Block4 implements ActionListener {
 
     public void paint(Graphics g) {
         g.setColor(Color.green);
-        //Controler.colr = 4;
+        Controler.colr = 4;
         if (onSide == false) {
             this.dropDownTo = Panel.dropDownTo - 20;
             if (y1 >= this.dropDownTo) {
