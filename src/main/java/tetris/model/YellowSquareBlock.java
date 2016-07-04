@@ -1,7 +1,8 @@
 package tetris.model;
 
 import tetris.controller.TetrisController;
-import tetris.view.*;
+import tetris.model.factory.Block;
+import tetris.model.factory.BlockType;
 import tetris.view.Panel;
 
 import javax.swing.*;
@@ -14,79 +15,82 @@ import java.awt.event.ActionListener;
  */
 public class YellowSquareBlock extends Block implements ActionListener {
 
-    public int x1, x2, x3, x4;
-    public int y1, y2, y3, y4;
-    public int offSet, offSet2;
-    public int dropDownTo;
-    public boolean onSide;
-    public static int num = 0;
-
-    Timer time;
+    private BlockType pieceShape;
+    private int coords[][];
+    private int[][][] coordsTable;
 
     public YellowSquareBlock() {
-        onSide = true;
-        coordinates();
-        time = new Timer(30, this);
-        time.stop();
+        coords = new int[4][2];
+        setShape(BlockType.YellowSquareBlock);
+    }
+
+    public void setShape(BlockType shape) {
+
+        coordsTable = new int[][][]{
+                {{0, 0}, {0, 0}, {0, 0}, {0, 0}},
+                {{0, -1}, {0, 0}, {-1, 0}, {-1, 1}},
+                {{0, -1}, {0, 0}, {1, 0}, {1, 1}},
+                {{0, -1}, {0, 0}, {0, 1}, {0, 2}},
+                {{-1, 0}, {0, 0}, {1, 0}, {0, 1}},
+                {{0, 0}, {1, 0}, {0, 1}, {1, 1}},
+                {{-1, -1}, {0, -1}, {0, 0}, {0, 1}},
+                {{1, -1}, {0, -1}, {0, 0}, {0, 1}}
+        };
+
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 2; ++j) {
+                coords[i][j] = coordsTable[shape.ordinal()][i][j];
+            }
+        }
+        pieceShape = shape;
+
+    }
+
+    private void setX(int index, int x) {
+        coords[index][0] = x;
+    }
+
+    private void setY(int index, int y) {
+        coords[index][1] = y;
+    }
+
+    public int x(int index) {
+        return coords[index][0];
+    }
+
+    public int y(int index) {
+        return coords[index][1];
+    }
+
+    public int minX() {
+        int m = coords[0][0];
+        for (int i = 0; i < 4; i++) {
+            m = Math.min(m, coords[i][0]);
+        }
+        return m;
+    }
+
+    public int minY() {
+        int m = coords[0][1];
+        for (int i = 0; i < 4; i++) {
+            m = Math.min(m, coords[i][1]);
+        }
+        return m;
+    }
+
+    public YellowSquareBlock rotateLeft() {
+
+        return this;
+    }
+
+    public YellowSquareBlock rotateRight() {
+
+        return this;
     }
 
     @Override
     public Block getBlock() {
         return this;
-    }
-
-    public void paint(Graphics g) {
-        g.setColor(Color.yellow);
-        TetrisController.colr = 3;
-        this.dropDownTo = tetris.view.Panel.dropDownTo;
-        if (y1 >= this.dropDownTo) {
-            Panel.num = 4;
-            coordinates();
-        }
-        if (y1 < this.dropDownTo) {
-            Panel.reached = false;
-            y1 = y1 + 1;
-            y2 = y2 + 1;
-            y3 = y3 + 1;
-            y4 = y4 + 1;
-        }
-        if (y1 >= this.dropDownTo) {
-            Panel.reached = true;
-        }
-        g.fillRect(x1, y1, 20, 20);
-        g.fillRect(x2, y2, 20, 20);
-        g.fillRect(x3, y3, 20, 20);
-        g.fillRect(x4, y4, 20, 20);
-        checkColumn();
-        checkRow();
-
-    }
-
-    public void coordinates() {
-        x1 = 120;
-        x2 = 140;
-        x3 = 140;
-        x4 = 120;
-        y1 = 100;
-        y2 = 100;
-        y3 = 120;
-        y4 = 120;
-        this.dropDownTo = 500;
-        if (onSide == false) {
-            this.onSide = true;
-        }
-    }
-
-    public void square() {
-        coordinates();
-    }
-
-    public void checkColumn() {
-        tetris.view.Panel.xNum = (x3/20);
-    }
-
-    public void checkRow() {
-        tetris.view.Panel.yNum = (y1/20);
     }
 
     public void actionPerformed(ActionEvent e) {

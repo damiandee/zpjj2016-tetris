@@ -1,4 +1,6 @@
-package tetris.model;
+package tetris.model.factory;
+
+import tetris.model.*;
 
 /**
  * Created by Damian Deska on 2016-07-04.

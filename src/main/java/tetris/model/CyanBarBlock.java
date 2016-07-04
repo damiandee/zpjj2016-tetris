@@ -1,6 +1,8 @@
 package tetris.model;
 
 import tetris.controller.TetrisController;
+import tetris.model.factory.Block;
+import tetris.model.factory.BlockType;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,111 +14,96 @@ import java.awt.event.ActionListener;
  */
 public class CyanBarBlock extends Block implements ActionListener {
 
-    public int x1, x2, x3;
-    public int y1, y2, y3;
-    public int offSet, offSet2, dropDownTo;
-    public boolean onSide;
-    public static int num = 0;
-
-    Timer time;
+    private BlockType pieceShape;
+    private int coords[][];
+    private int[][][] coordsTable;
 
     public CyanBarBlock() {
-        onSide = true;
-        if (tetris.view.Panel.spin != 0) {
-            tetris.view.Panel.spin = 0;
+        coords = new int[4][2];
+        setShape(BlockType.CyanBarBlock);
+    }
+
+    public void setShape(BlockType shape) {
+
+        coordsTable = new int[][][]{
+                {{0, 0}, {0, 0}, {0, 0}, {0, 0}},
+                {{0, -1}, {0, 0}, {-1, 0}, {-1, 1}},
+                {{0, -1}, {0, 0}, {1, 0}, {1, 1}},
+                {{0, -1}, {0, 0}, {0, 1}, {0, 2}},
+                {{-1, 0}, {0, 0}, {1, 0}, {0, 1}},
+                {{0, 0}, {1, 0}, {0, 1}, {1, 1}},
+                {{-1, -1}, {0, -1}, {0, 0}, {0, 1}},
+                {{1, -1}, {0, -1}, {0, 0}, {0, 1}}
+        };
+
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 2; ++j) {
+                coords[i][j] = coordsTable[shape.ordinal()][i][j];
+            }
         }
-        time = new Timer(50, this);
-        time.stop();
-        coordinates();
+        pieceShape = shape;
+
+    }
+
+    private void setX(int index, int x) {
+        coords[index][0] = x;
+    }
+
+    private void setY(int index, int y) {
+        coords[index][1] = y;
+    }
+
+    public int x(int index) {
+        return coords[index][0];
+    }
+
+    public int y(int index) {
+        return coords[index][1];
+    }
+
+    public int minX() {
+        int m = coords[0][0];
+        for (int i = 0; i < 4; i++) {
+            m = Math.min(m, coords[i][0]);
+        }
+        return m;
+    }
+
+    public int minY() {
+        int m = coords[0][1];
+        for (int i = 0; i < 4; i++) {
+            m = Math.min(m, coords[i][1]);
+        }
+        return m;
+    }
+
+    public CyanBarBlock rotateLeft() {
+
+        CyanBarBlock result = new CyanBarBlock();
+        result.pieceShape = pieceShape;
+
+        for (int i = 0; i < 4; ++i) {
+            result.setX(i, y(i));
+            result.setY(i, -x(i));
+        }
+        return result;
+    }
+
+    public CyanBarBlock rotateRight() {
+
+        CyanBarBlock result = new CyanBarBlock();
+        result.pieceShape = pieceShape;
+
+        for (int i = 0; i < 4; ++i) {
+            result.setX(i, -y(i));
+            result.setY(i, x(i));
+        }
+        return result;
     }
 
     @Override
     public Block getBlock() {
         return this;
-    }
-
-    public void coordinates() {
-        //onSide=true;
-        x1 = 120;
-        x2 = 140;
-        x3 = 160;
-        y1 = 60;
-        y2 = 60;
-        y3 = 60;
-        this.dropDownTo = 500;
-
-        if (tetris.view.Panel.spin == 1) {
-            tetris.view.Panel.spin = 2;
-        }
-        if (tetris.view.Panel.spin == 3) {
-            tetris.view.Panel.spin = 0;
-        }
-        if (onSide == false) {
-            this.onSide = true;
-        }
-        tetris.view.Panel.offSet = this.y2;
-        tetris.view.Panel.offSet2 = this.x2;
-    }
-
-    public void paint(Graphics g) {
-        if (onSide == false) {
-            this.dropDownTo = tetris.view.Panel.dropDownTo;
-            if (y1 >= dropDownTo + 20) {
-                tetris.view.Panel.shapeEnd = true;
-                tetris.view.Panel.num = 2;
-                coordinates();
-            }
-        }
-        if (onSide == true) {
-            this.dropDownTo = tetris.view.Panel.dropDownTo;
-            if (y1 >= dropDownTo + 20) {
-                tetris.view.Panel.shapeEnd = true;
-                tetris.view.Panel.num = 2;
-                coordinates();
-            }
-        }
-        if (y1 < dropDownTo + 20) {
-            tetris.view.Panel.reached = false;
-            y1 = y1 + 1;
-            y2 = y2 + 1;
-            y3 = y3 + 1;
-        }
-        if (y1 >= this.dropDownTo + 20) {
-            tetris.view.Panel.reached = true;
-        }
-        g.setColor(Color.cyan);
-        TetrisController.colr = 1;
-        g.fillRect(x1, y1, 20, 20);
-        g.fillRect(x2, y2, 20, 20);
-        g.fillRect(x3, y3, 20, 20);
-        checkColumn();
-        checkRow();
-    }
-
-    public void bar() {
-        x1 = offSet2;
-        x2 = offSet2;
-        x3 = offSet2;
-        y1 = offSet + 20;
-        y2 = offSet;
-        y3 = offSet - 20;
-    }
-
-    public void barOnItsSide() {
-        x1 = offSet2 - 20;
-        x2 = offSet2;
-        x3 = offSet2 + 20;
-        y1 = offSet;
-        y2 = offSet;
-        y3 = offSet;
-    }
-
-    public void checkColumn() {
-        tetris.view.Panel.xNum = (x3/20);
-    }
-
-    public void checkRow() {
-        tetris.view.Panel.yNum = (y1/20);
     }
 
     public void actionPerformed(ActionEvent e) {
