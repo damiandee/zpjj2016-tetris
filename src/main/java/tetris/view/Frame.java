@@ -1,4 +1,4 @@
-package tetris;
+package tetris.view;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,7 +11,7 @@ import java.awt.*;
 public class Frame extends JFrame {
 
     private static final long serialVersionUID = 1L;
-    public Panel panel;
+    public tetris.view.Panel panel;
     public Dimension dimension;
     int locX;
     int locY;
@@ -21,7 +21,7 @@ public class Frame extends JFrame {
         dimension = Toolkit.getDefaultToolkit().getScreenSize();
         locX = (int) dimension.getWidth() * 4 / 12;
         locY = (int) dimension.getHeight() * 2 / 12;
-        panel = new Panel();
+        panel = new tetris.view.Panel();
         this.setTitle("TETRIS");
         this.setSize(326, 585);
         this.setLocation(locX, locY);
