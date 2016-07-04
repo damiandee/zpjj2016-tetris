@@ -24,7 +24,7 @@ public class Block1 implements ActionListener {
             Panel.spin = 0;
         }
         time = new Timer(50, this);
-        time.stop();// elements 6 7 8
+        time.stop();
         coordinates();
     }
 
@@ -39,7 +39,6 @@ public class Block1 implements ActionListener {
         y3 = 60;
         this.dropDownTo = 500;
 
-        // bug fix for spin
         if (Panel.spin == 1) {
             Panel.spin = 2;
         }

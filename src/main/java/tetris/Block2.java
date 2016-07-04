@@ -46,7 +46,7 @@ public class Block2 implements ActionListener {
     public void paint(Graphics g) {
         if (Panel.spin == 0) {
             Panel.firstShape = true;
-        }   //bug fix
+        }
         g.setColor(Color.red);
         //Controler.colr = 2;
         if (onSide == 1) {

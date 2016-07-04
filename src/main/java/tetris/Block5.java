@@ -13,7 +13,8 @@ public class Block5 implements ActionListener {
 
     Timer time;
 
-    public int x1, x2, x3, x4, y1, y2, y3, y4;
+    public int x1, x2, x3, x4;
+    public int y1, y2, y3, y4;
     public int offSet, offSet2, dropDownTo;
     public boolean onSide, standingOffset = false;
 
