@@ -32,6 +32,8 @@ public class Frame extends JFrame implements ActionListener {
 
         login.placeComponents(panel);
 
+
+
         add(panel);
 
         panel.start();

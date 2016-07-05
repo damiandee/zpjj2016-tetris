@@ -39,7 +39,7 @@ public class Score extends JFrame implements ActionListener {
         String dateString = dateFormat.format(currentDate);
         System.out.println(dateString);
 
-        date = new JLabel("Data rozgrywki: " +  dateString);
+        date = new JLabel("Data rozgrywki: " + dateString);
         add(date, BorderLayout.SOUTH);
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);
