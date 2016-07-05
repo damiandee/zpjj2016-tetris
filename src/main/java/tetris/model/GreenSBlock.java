@@ -52,12 +52,12 @@ public class GreenSBlock extends Block implements ActionListener {
     }
 
     @Override
-    public int x(int index) {
+    public int getX(int index) {
         return coords[index][0];
     }
 
     @Override
-    public int y(int index) {
+    public int getY(int index) {
         return coords[index][1];
     }
 
@@ -71,7 +71,7 @@ public class GreenSBlock extends Block implements ActionListener {
     }
 
     @Override
-    public int minY() {
+    public int getMinY() {
         int m = coords[0][1];
         for (int i = 0; i < 4; i++) {
             m = Math.min(m, coords[i][1]);
@@ -86,8 +86,8 @@ public class GreenSBlock extends Block implements ActionListener {
         result.greenSBlockType = greenSBlockType;
 
         for (int i = 0; i < 4; ++i) {
-            result.setX(i, y(i));
-            result.setY(i, -x(i));
+            result.setX(i, getY(i));
+            result.setY(i, -getX(i));
         }
         return result;
     }
@@ -99,8 +99,8 @@ public class GreenSBlock extends Block implements ActionListener {
         result.greenSBlockType = greenSBlockType;
 
         for (int i = 0; i < 4; ++i) {
-            result.setX(i, -y(i));
-            result.setY(i, x(i));
+            result.setX(i, -getY(i));
+            result.setY(i, getX(i));
         }
         return result;
     }

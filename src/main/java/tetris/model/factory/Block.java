@@ -9,10 +9,10 @@ public abstract class Block {
     public abstract Block getBlock();
     public abstract BlockType getBlockType();
     public abstract void setBlockType(BlockType blockType);
-    public abstract int x(int index);
-    public abstract int y(int index);
+    public abstract int getX(int index);
+    public abstract int getY(int index);
     public abstract int minX();
-    public abstract int minY();
+    public abstract int getMinY();
     public abstract Block rotateLeft();
     public abstract Block rotateRight();
 }

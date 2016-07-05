@@ -51,12 +51,12 @@ public class YellowSquareBlock extends Block implements ActionListener {
     }
 
     @Override
-    public int x(int index) {
+    public int getX(int index) {
         return coords[index][0];
     }
 
     @Override
-    public int y(int index) {
+    public int getY(int index) {
         return coords[index][1];
     }
 
@@ -70,7 +70,7 @@ public class YellowSquareBlock extends Block implements ActionListener {
     }
 
     @Override
-    public int minY() {
+    public int getMinY() {
         int m = coords[0][1];
         for (int i = 0; i < 4; i++) {
             m = Math.min(m, coords[i][1]);

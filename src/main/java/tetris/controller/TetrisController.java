@@ -1,11 +1,11 @@
-package tetris.view;
+package tetris.controller;
 
 //import tetris.controller.TetrisController;
-import tetris.model.*;
 import tetris.model.factory.Block;
 import tetris.model.factory.BlockFactory;
 import tetris.model.factory.BlockType;
 import tetris.model.factory.TetrisBlockFactory;
+import tetris.view.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,7 +15,7 @@ import java.util.Random;
 /**
  * Created by Dominika on 2016-07-03.
  */
-public class Panel extends JPanel implements  ActionListener {
+public class TetrisController extends JPanel implements  ActionListener {
 
     final int BoardWidth = 10;
     final int BoardHeight = 22;
@@ -33,7 +33,7 @@ public class Panel extends JPanel implements  ActionListener {
 
     BlockFactory blockFactory = new TetrisBlockFactory();
 
-    public Panel(Frame frame) {
+    public TetrisController(tetris.view.Frame frame) {
 
         setFocusable(true);
         setRandomBlock();
@@ -122,8 +122,8 @@ public class Panel extends JPanel implements  ActionListener {
 
         if (curPiece.getBlockType() != BlockType.NoShapeBlock) {
             for (int i = 0; i < 4; ++i) {
-                int x = curX + curPiece.x(i);
-                int y = curY - curPiece.y(i);
+                int x = curX + curPiece.getX(i);
+                int y = curY - curPiece.getY(i);
                 drawSquare(g, 0 + x * squareWidth(),
                         boardTop + (BoardHeight - y - 1) * squareHeight(),
                         curPiece.getBlockType());
@@ -156,8 +156,8 @@ public class Panel extends JPanel implements  ActionListener {
 
     private void pieceDropped() {
         for (int i = 0; i < 4; ++i) {
-            int x = curX + curPiece.x(i);
-            int y = curY - curPiece.y(i);
+            int x = curX + curPiece.getX(i);
+            int y = curY - curPiece.getY(i);
             board[(y * BoardWidth) + x] = curPiece.getBlockType();
         }
 
@@ -171,7 +171,7 @@ public class Panel extends JPanel implements  ActionListener {
     private void newPiece() {
         setRandomBlock();
         curX = BoardWidth / 2 + 1;
-        curY = BoardHeight - 1 + curPiece.minY();
+        curY = BoardHeight - 1 + curPiece.getMinY();
 
         if (!tryMove(curPiece, curX, curY)) {
             curPiece.setBlockType(BlockType.NoShapeBlock);
@@ -183,8 +183,8 @@ public class Panel extends JPanel implements  ActionListener {
 
     private boolean tryMove(Block newPiece, int newX, int newY) {
         for (int i = 0; i < 4; ++i) {
-            int x = newX + newPiece.x(i);
-            int y = newY - newPiece.y(i);
+            int x = newX + newPiece.getX(i);
+            int y = newY - newPiece.getY(i);
             if (x < 0 || x >= BoardWidth || y < 0 || y >= BoardHeight) {
                 return false;
             }
@@ -233,9 +233,9 @@ public class Panel extends JPanel implements  ActionListener {
     }
 
     private void drawSquare(Graphics g, int x, int y, BlockType shape) {
-        Color colors[] = {new Color(0, 0, 0), new Color(204, 102, 102),
-                new Color(102, 204, 102), new Color(102, 102, 204),
-                new Color(204, 204, 102), new Color(204, 102, 204),
+        Color colors[] = {new Color(0, 0, 0), new Color(39, 204, 72),
+                new Color(102, 102, 204), new Color(0, 204, 204),
+                new Color(204, 102, 102), new Color(204, 204, 102),
                 new Color(102, 204, 204), new Color(218, 170, 0)
         };
 

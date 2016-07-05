@@ -1,5 +1,7 @@
 package tetris.view;
 
+import tetris.controller.TetrisController;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -20,7 +22,7 @@ public class Frame extends JFrame implements ActionListener {
 
         statusbar = new JLabel(" 0");
         add(statusbar, BorderLayout.SOUTH);
-        Panel panel = new Panel(this);
+        TetrisController tetrisController = new TetrisController(this);
 
         score = new Button("Wyniki");
         score.setBounds(10, 10, 50, 30);
@@ -34,9 +36,9 @@ public class Frame extends JFrame implements ActionListener {
         add(login);
         login.addActionListener(this);
 
-        add(panel);
+        add(tetrisController);
 
-        panel.start();
+        tetrisController.start();
         setSize(400, 600);
         setTitle("Tetris");
 
@@ -56,7 +58,6 @@ public class Frame extends JFrame implements ActionListener {
 
     }
 
-    @Override
     public void actionPerformed(ActionEvent e) {
 
         score.addActionListener(this);

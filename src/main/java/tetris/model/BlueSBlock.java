@@ -44,21 +44,21 @@ public class BlueSBlock extends Block implements ActionListener {
 
     }
 
-    private void setX(int index, int x) {
+    public void setX(int index, int x) {
         coords[index][0] = x;
     }
 
-    private void setY(int index, int y) {
+    public void setY(int index, int y) {
         coords[index][1] = y;
     }
 
     @Override
-    public int x(int index) {
+    public int getX(int index) {
         return coords[index][0];
     }
 
     @Override
-    public int y(int index) {
+    public int getY(int index) {
         return coords[index][1];
     }
 
@@ -72,7 +72,7 @@ public class BlueSBlock extends Block implements ActionListener {
     }
 
     @Override
-    public int minY() {
+    public int getMinY() {
         int m = coords[0][1];
         for (int i = 0; i < 4; i++) {
             m = Math.min(m, coords[i][1]);
@@ -87,8 +87,8 @@ public class BlueSBlock extends Block implements ActionListener {
         result.blueSBlockType = blueSBlockType;
 
         for (int i = 0; i < 4; ++i) {
-            result.setX(i, y(i));
-            result.setY(i, -x(i));
+            result.setX(i, getY(i));
+            result.setY(i, -getX(i));
         }
         return result;
     }
@@ -100,8 +100,8 @@ public class BlueSBlock extends Block implements ActionListener {
         result.blueSBlockType = blueSBlockType;
 
         for (int i = 0; i < 4; ++i) {
-            result.setX(i, -y(i));
-            result.setY(i, x(i));
+            result.setX(i, -getY(i));
+            result.setY(i, getX(i));
         }
         return result;
     }
@@ -114,6 +114,10 @@ public class BlueSBlock extends Block implements ActionListener {
     @Override
     public BlockType getBlockType(){
         return this.blueSBlockType;
+    }
+
+    public int[][] getCoordinates() {
+        return coords;
     }
 
     public void actionPerformed(ActionEvent e) {
