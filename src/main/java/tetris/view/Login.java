@@ -35,6 +35,5 @@ public class Login {
                 panel.remove(userLabel);
             }
         });
-
     }
 }
