@@ -7,6 +7,8 @@ import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import static tetris.view.Login.variable;
+
 
 /**
  * Created by Dominika on 2016-07-03.
@@ -18,14 +20,15 @@ public class Score extends JFrame implements ActionListener {
     JLabel statusbar;
     String username;
 
-    public Score(tetris.view.Frame frame) {
+    public Score(Frame frame) {
         super();
         setSize(200, 200);
         setVisible(true);
         setTitle("Wyniki");
         setLayout(new BorderLayout());
 
-        username = "user1";
+        username = variable;
+        //username = "user1";
         sc = new JLabel("Wynik uzytkownika " + username);
         add(sc, BorderLayout.PAGE_START);
 

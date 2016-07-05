@@ -9,6 +9,8 @@ import java.awt.event.ActionListener;
  */
 public class Login {
 
+    static String variable;
+
     public static void placeComponents(final JPanel panel) {
 
         panel.setLayout(null);
@@ -20,6 +22,9 @@ public class Login {
         final JTextField userText = new JTextField(20);
         userText.setBounds(100, 10, 160, 25);
         panel.add(userText);
+
+
+
 
 //        JLabel passwordLabel = new JLabel("Haslo");
 //        passwordLabel.setBounds(10, 40, 80, 25);
@@ -41,11 +46,15 @@ public class Login {
                 panel.remove(loginButton);
                 panel.remove(userText);
                 panel.remove(userLabel);
+                variable = userText.getText();
             }
         });
+
+
 
 //        JButton registerButton = new JButton("register");
 //        registerButton.setBounds(180, 80, 80, 25);
 //        panel.add(registerButton);
     }
+
 }
