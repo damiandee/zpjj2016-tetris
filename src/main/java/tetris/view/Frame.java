@@ -15,34 +15,35 @@ public class Frame extends JFrame implements ActionListener {
     Button score;
     Button login;
     JLabel statusbar;
+    private JPanel startFrame = new JPanel();
 
     public Frame() {
 
         statusbar = new JLabel(" 0");
-        add(statusbar, BorderLayout.SOUTH);
-        Panel panel = new Panel(this);
-
-        score = new Button("Wyniki");
-        score.setBounds(300, 10, 50, 30);
-        score.setVisible(true);
-        add(score);
-        score.addActionListener(this);
-
-        Login login = new Login();
-
-        login.placeComponents(panel);
+        final Frame mainFrame = this;
 
 
+        JButton start = new JButton("START");
+        startFrame.add(start);
 
-        add(panel);
-
-        panel.start();
+        add(startFrame);
         setSize(400, 600);
         setTitle("Tetris");
 
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+
+        start.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                final Panel panel = new Panel(mainFrame);
+                panel.add(statusbar, BorderLayout.SOUTH);
+                add(panel);
+                startFrame.setVisible(false);
+                panel.start();
+            }
+        });
     }
+
 
     public JLabel getStatusBar() {
         return statusbar;
