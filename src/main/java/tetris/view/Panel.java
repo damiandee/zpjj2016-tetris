@@ -1,7 +1,6 @@
 package tetris.view;
 
 //import tetris.controller.TetrisController;
-import tetris.model.*;
 import tetris.model.factory.Block;
 import tetris.model.factory.BlockFactory;
 import tetris.model.factory.BlockType;
@@ -9,7 +8,10 @@ import tetris.model.factory.TetrisBlockFactory;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.Random;
 
 /**
@@ -35,9 +37,11 @@ public class Panel extends JPanel implements  ActionListener {
 
     public Panel(Frame frame) {
 
+
         setFocusable(true);
         setRandomBlock();
         timer = new Timer(400, this);
+
         timer.start();
 
         statusbar = frame.getStatusBar();

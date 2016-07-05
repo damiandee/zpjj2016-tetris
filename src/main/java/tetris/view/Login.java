@@ -1,35 +1,38 @@
 package tetris.view;
 
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 /**
  * Created by Dominika on 2016-07-05.
  */
-public class Login extends JFrame implements ActionListener {
+public class Login {
 
-    JTextField login;
-    JTextField password;
+    public static void placeComponents(JPanel panel) {
 
-    public Login() {
-        super();
-        setSize(200, 300);
-        setVisible(true);
-        setTitle("Logowanie");
-        setLayout(new BorderLayout());
+        panel.setLayout(null);
 
-        login = new JTextField();
-        add(login, BorderLayout.PAGE_START);
+        JLabel userLabel = new JLabel("Uzytkownik");
+        userLabel.setBounds(10, 10, 80, 25);
+        panel.add(userLabel);
 
-        password = new JTextField();
-        add(password, BorderLayout.PAGE_END);
+        JTextField userText = new JTextField(20);
+        userText.setBounds(100, 10, 160, 25);
+        panel.add(userText);
 
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-    }
+//        JLabel passwordLabel = new JLabel("Haslo");
+//        passwordLabel.setBounds(10, 40, 80, 25);
+//        panel.add(passwordLabel);
 
-    public void actionPerformed(ActionEvent e) {
+//        JPasswordField passwordText = new JPasswordField(20);
+//        passwordText.setBounds(100, 40, 160, 25);
+//        panel.add(passwordText);
 
+        JButton loginButton = new JButton("Zaloguj");
+        loginButton.setBounds(10, 80, 80, 25);
+        panel.add(loginButton);
+
+//        JButton registerButton = new JButton("register");
+//        registerButton.setBounds(180, 80, 80, 25);
+//        panel.add(registerButton);
     }
 }

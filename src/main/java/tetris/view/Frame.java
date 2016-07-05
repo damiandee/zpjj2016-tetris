@@ -23,16 +23,14 @@ public class Frame extends JFrame implements ActionListener {
         Panel panel = new Panel(this);
 
         score = new Button("Wyniki");
-        score.setBounds(10, 10, 50, 30);
+        score.setBounds(300, 10, 50, 30);
         score.setVisible(true);
         add(score);
         score.addActionListener(this);
 
-        login = new Button("Zaloguj");
-        login.setBounds(320, 10, 50, 30);
-        login.setVisible(false);
-        add(login);
-        login.addActionListener(this);
+        Login login = new Login();
+
+        login.placeComponents(panel);
 
         add(panel);
 
@@ -56,13 +54,9 @@ public class Frame extends JFrame implements ActionListener {
 
     }
 
-    @Override
     public void actionPerformed(ActionEvent e) {
-
         score.addActionListener(this);
         Score sc = new Score(this);
-        login.addActionListener(this);
-        Login lo = new Login();
-
     }
+
 }
