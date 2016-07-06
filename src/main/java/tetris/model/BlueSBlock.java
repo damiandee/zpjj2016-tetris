@@ -14,34 +14,15 @@ public class BlueSBlock extends Block implements ActionListener {
 
     private BlockType blueSBlockType = BlockType.BlueSBlock;
     private int coords[][];
-    private int[][][] coordsTable;
 
     public BlueSBlock() {
-        coords = new int[4][2];
         setBlockType(BlockType.BlueSBlock);
     }
 
     @Override
     public void setBlockType(BlockType shape) {
-
-        coordsTable = new int[][][]{
-                {{0, 0}, {0, 0}, {0, 0}, {0, 0}},
-                {{0, -1}, {0, 0}, {-1, 0}, {-1, 1}},
-                {{0, -1}, {0, 0}, {1, 0}, {1, 1}},
-                {{0, -1}, {0, 0}, {0, 1}, {0, 2}},
-                {{-1, 0}, {0, 0}, {1, 0}, {0, 1}},
-                {{0, 0}, {1, 0}, {0, 1}, {1, 1}},
-                {{-1, -1}, {0, -1}, {0, 0}, {0, 1}},
-                {{1, -1}, {0, -1}, {0, 0}, {0, 1}}
-        };
-
-        for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 2; ++j) {
-                coords[i][j] = coordsTable[shape.ordinal()][i][j];
-            }
-        }
+        coords = new int[][] {{0, -1}, {0, 0}, {-1, 0}, {-1, 1}};
         blueSBlockType = shape;
-
     }
 
     public void setX(int index, int x) {

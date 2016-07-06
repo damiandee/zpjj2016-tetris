@@ -13,7 +13,6 @@ public class GreenSBlock extends Block implements ActionListener {
 
     private BlockType greenSBlockType = BlockType.GreenSBlock;
     private int coords[][];
-    private int[][][] coordsTable;
 
     public GreenSBlock() {
         coords = new int[4][2];
@@ -22,25 +21,8 @@ public class GreenSBlock extends Block implements ActionListener {
 
     @Override
     public void setBlockType(BlockType shape) {
-
-        coordsTable = new int[][][]{
-                {{0, 0}, {0, 0}, {0, 0}, {0, 0}},
-                {{0, -1}, {0, 0}, {-1, 0}, {-1, 1}},
-                {{0, -1}, {0, 0}, {1, 0}, {1, 1}},
-                {{0, -1}, {0, 0}, {0, 1}, {0, 2}},
-                {{-1, 0}, {0, 0}, {1, 0}, {0, 1}},
-                {{0, 0}, {1, 0}, {0, 1}, {1, 1}},
-                {{-1, -1}, {0, -1}, {0, 0}, {0, 1}},
-                {{1, -1}, {0, -1}, {0, 0}, {0, 1}}
-        };
-
-        for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 2; ++j) {
-                coords[i][j] = coordsTable[shape.ordinal()][i][j];
-            }
-        }
+        coords = new int[][]{{0, -1}, {0, 0}, {1, 0}, {1, 1}};
         greenSBlockType = shape;
-
     }
 
     private void setX(int index, int x) {

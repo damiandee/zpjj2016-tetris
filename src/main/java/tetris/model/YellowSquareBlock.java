@@ -13,7 +13,6 @@ public class YellowSquareBlock extends Block implements ActionListener {
 
     private BlockType yellowSquareBlockType = BlockType.YellowSquareBlock;
     private int coords[][];
-    private int[][][] coordsTable;
 
     public YellowSquareBlock() {
         coords = new int[4][2];
@@ -21,25 +20,8 @@ public class YellowSquareBlock extends Block implements ActionListener {
     }
 
     public void setBlockType(BlockType shape) {
-
-        coordsTable = new int[][][]{
-                {{0, 0}, {0, 0}, {0, 0}, {0, 0}},
-                {{0, -1}, {0, 0}, {-1, 0}, {-1, 1}},
-                {{0, -1}, {0, 0}, {1, 0}, {1, 1}},
-                {{0, -1}, {0, 0}, {0, 1}, {0, 2}},
-                {{-1, 0}, {0, 0}, {1, 0}, {0, 1}},
-                {{0, 0}, {1, 0}, {0, 1}, {1, 1}},
-                {{-1, -1}, {0, -1}, {0, 0}, {0, 1}},
-                {{1, -1}, {0, -1}, {0, 0}, {0, 1}}
-        };
-
-        for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 2; ++j) {
-                coords[i][j] = coordsTable[shape.ordinal()][i][j];
-            }
-        }
+        coords = new int[][]{{0, 0}, {1, 0}, {0, 1}, {1, 1}};
         yellowSquareBlockType = shape;
-
     }
 
     private void setX(int index, int x) {

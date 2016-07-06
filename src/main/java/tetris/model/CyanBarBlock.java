@@ -13,40 +13,21 @@ public class CyanBarBlock extends Block implements ActionListener {
 
     private BlockType cyanBarBlockType = BlockType.CyanBarBlock;
     private int coords[][];
-    private int[][][] coordsTable;
 
     public CyanBarBlock() {
-        coords = new int[4][2];
         setBlockType(BlockType.CyanBarBlock);
     }
 
     public void setBlockType(BlockType shape) {
-
-        coordsTable = new int[][][]{
-                {{0, 0}, {0, 0}, {0, 0}, {0, 0}},
-                {{0, -1}, {0, 0}, {-1, 0}, {-1, 1}},
-                {{0, -1}, {0, 0}, {1, 0}, {1, 1}},
-                {{0, -1}, {0, 0}, {0, 1}, {0, 2}},
-                {{-1, 0}, {0, 0}, {1, 0}, {0, 1}},
-                {{0, 0}, {1, 0}, {0, 1}, {1, 1}},
-                {{-1, -1}, {0, -1}, {0, 0}, {0, 1}},
-                {{1, -1}, {0, -1}, {0, 0}, {0, 1}}
-        };
-
-        for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 2; ++j) {
-                coords[i][j] = coordsTable[shape.ordinal()][i][j];
-            }
-        }
+        coords = new int[][]{{0, -1}, {0, 0}, {0, 1}, {0, 2}};
         cyanBarBlockType = shape;
-
     }
 
-    private void setX(int index, int x) {
+    public void setX(int index, int x) {
         coords[index][0] = x;
     }
 
-    private void setY(int index, int y) {
+    public void setY(int index, int y) {
         coords[index][1] = y;
     }
 
@@ -114,6 +95,10 @@ public class CyanBarBlock extends Block implements ActionListener {
     @Override
     public BlockType getBlockType() {
         return this.cyanBarBlockType;
+    }
+
+    public int[][] getCoordinates() {
+        return coords;
     }
 
     public void actionPerformed(ActionEvent e) {
