@@ -34,7 +34,7 @@ public class Score extends JFrame implements ActionListener {
 
         statusbar = frame.getStatusBar();
 
-        statusbar = new JLabel("Uzyskany wynik: " + frame.panel.getPointsNumber());
+        statusbar = new JLabel("Uzyskany wynik: " + frame.tetrisController.getPointsNumber());
         add(statusbar, BorderLayout.CENTER);
 
         Date currentDate = new Date();

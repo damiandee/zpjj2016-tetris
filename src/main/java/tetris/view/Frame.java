@@ -20,7 +20,7 @@ public class Frame extends JFrame implements ActionListener {
     private JPanel startFrame = new JPanel();
     final private Frame mainFrame;
     final private Frame scoreFrame;
-    public Panel panel;
+    public TetrisController tetrisController;
 
     public Frame() {
 
@@ -51,13 +51,13 @@ public class Frame extends JFrame implements ActionListener {
 
         start.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                panel = new Panel(mainFrame);
+                Frame.this.tetrisController = new TetrisController(mainFrame);
 
-                panel.add(statusbar, BorderLayout.SOUTH);
+                Frame.this.tetrisController.add(statusbar, BorderLayout.SOUTH);
 
-                add(panel);
+                add(Frame.this.tetrisController);
                 startFrame.setVisible(false);
-                panel.start();
+                Frame.this.tetrisController.start();
             }
         });
     }
@@ -83,7 +83,7 @@ public class Frame extends JFrame implements ActionListener {
             add(score);
             score.addActionListener(scoreFrame);
 
-            panel.setVisible(false);
+            tetrisController.setVisible(false);
 
             Login login = new Login();
             login.placeComponents(scoreFrame);
