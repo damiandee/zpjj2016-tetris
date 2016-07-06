@@ -12,16 +12,19 @@ import java.awt.event.ActionListener;
 
 public class Frame extends JFrame implements ActionListener {
 
-    Button score;
+    Button score = new Button("Wyniki");;
     Button login;
     JLabel statusbar;
     private JPanel startFrame = new JPanel();
+    final private Frame mainFrame;
+    final private Frame scoreFrame;
+    private Panel panel;
 
     public Frame() {
 
         statusbar = new JLabel(" 0");
-        final Frame mainFrame = this;
-
+        mainFrame = this;
+        scoreFrame = this;
 
         JButton start = new JButton("START");
         startFrame.add(start);
@@ -35,8 +38,10 @@ public class Frame extends JFrame implements ActionListener {
 
         start.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                final Panel panel = new Panel(mainFrame);
+                panel = new Panel(mainFrame);
+
                 panel.add(statusbar, BorderLayout.SOUTH);
+
                 add(panel);
                 startFrame.setVisible(false);
                 panel.start();
@@ -55,6 +60,20 @@ public class Frame extends JFrame implements ActionListener {
         game.setLocationRelativeTo(null);
         game.setVisible(true);
 
+    }
+
+    public void endGame() {
+        String text = "game over";
+        final Panel scores = new Panel(scoreFrame);
+        if(statusbar.getText().equals(text)){
+            score.setBounds(300, 10, 50, 30);
+            score.setVisible(true);
+            add(score);
+            score.addActionListener(scoreFrame);
+            panel.setVisible(false);
+            Login login = new Login();
+            login.placeComponents(panel);
+        }
     }
 
     public void actionPerformed(ActionEvent e) {

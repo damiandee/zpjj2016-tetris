@@ -32,12 +32,13 @@ public class Panel extends JPanel implements  ActionListener {
     JLabel statusbar;
     Block curPiece;
     BlockType[] board;
+    Frame mainFrame;
 
     BlockFactory blockFactory = new TetrisBlockFactory();
 
     public Panel(Frame frame) {
 
-
+        this.mainFrame = frame;
         setFocusable(true);
         setRandomBlock();
         timer = new Timer(400, this);
@@ -159,15 +160,14 @@ public class Panel extends JPanel implements  ActionListener {
     }
 
     private void pieceDropped() {
-        for (int i = 0; i < 4; ++i) {
-            int x = curX + curPiece.x(i);
-            int y = curY - curPiece.y(i);
-            board[(y * BoardWidth) + x] = curPiece.getBlockType();
-        }
-
-        removeFullLines();
-
         if (!isFallingFinished) {
+            for (int i = 0; i < 4; ++i) {
+                int x = curX + curPiece.x(i);
+                int y = curY - curPiece.y(i);
+                board[(y * BoardWidth) + x] = curPiece.getBlockType();
+            }
+
+            removeFullLines();
             newPiece();
         }
     }
@@ -182,6 +182,7 @@ public class Panel extends JPanel implements  ActionListener {
             timer.stop();
             isStarted = false;
             statusbar.setText("game over");
+            mainFrame.endGame();
         }
     }
 
