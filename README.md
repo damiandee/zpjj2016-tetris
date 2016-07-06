@@ -14,7 +14,7 @@ Przy pomocy IntelliJ IDEA Community Edition.
 1. Wybieramy "Edit Configurations...".
 2. Wybieramy "Add New Configuration".
 3. Spośród dostępnych konfiguracji wybieramy "Application".
-4. Wybieramy klasę Frame jako Main class oraz ustawiamy nazwę "Name" konfiguracji wedle uznania np. "Start".
+4. Wybieramy klasę Frame jako "Main class" oraz ustawiamy nazwę "Name" konfiguracji wedle uznania np. "Start".
 5. Klikamy w przycisk "Apply" następnie w przycisk "Ok".
 6. Klikamy w przycisk Run "Start" i uruchamiamy aplikację.
 
