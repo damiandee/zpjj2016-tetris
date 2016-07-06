@@ -16,12 +16,20 @@ public class TetrisBlockFactory implements BlockFactory {
                 block = new BlueSBlock();
                 break;
 
+            case BrownLBlock:
+                block = new BrownLBlock();
+                break;
+
             case CyanBarBlock:
                 block = new CyanBarBlock();
                 break;
 
             case GreenSBlock:
                 block = new GreenSBlock();
+                break;
+
+            case PinkLBlock:
+                block = new PinkLBlock();
                 break;
 
             case RedCrossBlock:

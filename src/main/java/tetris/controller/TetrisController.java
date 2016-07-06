@@ -1,12 +1,9 @@
 package tetris.controller;
 
-//import tetris.controller.TetrisController;
 import tetris.model.factory.Block;
 import tetris.model.factory.BlockFactory;
 import tetris.model.factory.BlockType;
 import tetris.model.factory.TetrisBlockFactory;
-import tetris.view.*;
-import tetris.view.Frame;
 
 import javax.swing.*;
 import java.awt.*;
@@ -64,7 +61,7 @@ public class TetrisController extends JPanel implements  ActionListener {
 
     public void setRandomBlock() {
         Random r = new Random();
-        int x = Math.abs(r.nextInt()) % 5 + 1;
+        int x = Math.abs(r.nextInt()) % 7 + 1;
         BlockType[] values = BlockType.values();
         curPiece = blockFactory.makeBlock(values[x]);
     }
@@ -242,9 +239,9 @@ public class TetrisController extends JPanel implements  ActionListener {
 
     private void drawSquare(Graphics g, int x, int y, BlockType shape) {
         Color colors[] = {new Color(0, 0, 0), new Color(39, 204, 72),
-                new Color(0, 204, 204), new Color(102, 102, 204),
-                new Color(204, 102, 102), new Color(204, 204, 102),
-                new Color(102, 204, 204), new Color(218, 170, 0)
+                new Color(182, 100, 0), new Color(110, 204, 204),
+                new Color(102, 102, 204), new Color(214, 80, 200),
+                new Color(204, 102, 102), new Color(204, 204, 102)
         };
 
         Color color = colors[shape.ordinal()];
