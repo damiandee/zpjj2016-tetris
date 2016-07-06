@@ -26,7 +26,7 @@ public class Panel extends JPanel implements  ActionListener {
     boolean isFallingFinished = false;
     boolean isStarted = false;
     boolean isPaused = false;
-    int numLinesRemoved = 0;
+    private int numLinesRemoved = 0;
     int curX = 0;
     int curY = 0;
     JLabel statusbar;
@@ -258,6 +258,10 @@ public class Panel extends JPanel implements  ActionListener {
                 x + squareWidth() - 1, y + squareHeight() - 1);
         g.drawLine(x + squareWidth() - 1, y + squareHeight() - 1,
                 x + squareWidth() - 1, y + 1);
+    }
+
+    public int getPointsNumber() {
+        return numLinesRemoved;
     }
 
     class TAdapter extends KeyAdapter {

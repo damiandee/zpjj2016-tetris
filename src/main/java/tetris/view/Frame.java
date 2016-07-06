@@ -18,7 +18,7 @@ public class Frame extends JFrame implements ActionListener {
     private JPanel startFrame = new JPanel();
     final private Frame mainFrame;
     final private Frame scoreFrame;
-    private Panel panel;
+    public Panel panel;
 
     public Frame() {
 
