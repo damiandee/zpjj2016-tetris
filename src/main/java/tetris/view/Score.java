@@ -29,7 +29,7 @@ public class Score extends JFrame implements ActionListener {
 
         username = variable;
         //username = "user1";
-        sc = new JLabel("Wynik uzytkownika " + username);
+        sc = new JLabel("Wynik uzytkownika: " + username);
         add(sc, BorderLayout.PAGE_START);
 
         statusbar = frame.getStatusBar();

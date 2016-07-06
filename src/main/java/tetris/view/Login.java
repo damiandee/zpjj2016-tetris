@@ -15,7 +15,7 @@ public class Login {
 
         frame.setLayout(null);
 
-        final JLabel userLabel = new JLabel("Uzytkownik");
+        final JLabel userLabel = new JLabel("Uzytkownik: ");
         userLabel.setBounds(10, 10, 80, 25);
         frame.add(userLabel);
 
@@ -30,11 +30,14 @@ public class Login {
         loginButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 JLabel username = new JLabel(userText.getText());
-                username.setBounds(10, 10, 80, 25);
                 frame.add(username);
-                frame.remove(loginButton);
+                username.setBounds(10, 10, 80, 25);
+                userLabel.setVisible(false);
+                userText.setVisible(false);
+                loginButton.setVisible(false);
                 frame.remove(userText);
                 frame.remove(userLabel);
+                frame.remove(loginButton);
                 variable = userText.getText();
             }
         });
