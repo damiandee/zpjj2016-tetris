@@ -25,11 +25,11 @@ public class GreenSBlock extends Block implements ActionListener {
         greenSBlockType = shape;
     }
 
-    private void setX(int index, int x) {
+    public void setX(int index, int x) {
         coords[index][0] = x;
     }
 
-    private void setY(int index, int y) {
+    public void setY(int index, int y) {
         coords[index][1] = y;
     }
 
@@ -95,6 +95,10 @@ public class GreenSBlock extends Block implements ActionListener {
     @Override
     public  BlockType getBlockType() {
         return this.greenSBlockType;
+    }
+
+    public int[][] getCoordinates() {
+        return coords;
     }
 
     public void actionPerformed(ActionEvent e) {
