@@ -64,15 +64,17 @@ public class Frame extends JFrame implements ActionListener {
 
     public void endGame() {
         String text = "game over";
-        final Panel scores = new Panel(scoreFrame);
+       // final Panel scores = new Panel(scoreFrame);
         if(statusbar.getText().equals(text)){
             score.setBounds(300, 10, 50, 30);
             score.setVisible(true);
             add(score);
             score.addActionListener(scoreFrame);
+
             panel.setVisible(false);
+
             Login login = new Login();
-            login.placeComponents(panel);
+            login.placeComponents(scoreFrame);
         }
     }
 

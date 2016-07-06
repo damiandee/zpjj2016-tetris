@@ -9,34 +9,35 @@ import java.awt.event.ActionListener;
  */
 public class Login {
 
-    static String user;
+    static String variable;
 
-    public static void placeComponents(final JPanel panel) {
+    public static void placeComponents(final Frame frame) {
 
-        panel.setLayout(null);
+        frame.setLayout(null);
 
         final JLabel userLabel = new JLabel("Uzytkownik");
         userLabel.setBounds(10, 10, 80, 25);
-        panel.add(userLabel);
+        frame.add(userLabel);
 
         final JTextField userText = new JTextField(20);
         userText.setBounds(100, 10, 160, 25);
-        panel.add(userText);
+        frame.add(userText);
 
         final JButton loginButton = new JButton("Zaloguj");
         loginButton.setBounds(10, 80, 80, 25);
-        panel.add(loginButton);
+        frame.add(loginButton);
 
         loginButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 JLabel username = new JLabel(userText.getText());
                 username.setBounds(10, 10, 80, 25);
-                panel.add(username);
-                panel.remove(loginButton);
-                panel.remove(userText);
-                panel.remove(userLabel);
-                user = userText.getText();
+                frame.add(username);
+                frame.remove(loginButton);
+                frame.remove(userText);
+                frame.remove(userLabel);
+                variable = userText.getText();
             }
         });
+
     }
 }
