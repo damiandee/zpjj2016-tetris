@@ -10,17 +10,17 @@ import static org.junit.Assert.*;
 public class FrameTest {
 
     //TODO dokonczyc test po mergu
-    Frame frame;
-
-    @Before
-    public void setUp() {
-        frame = new Frame();
-    }
-
-    @Test
-    public void checkStatusBarTest() {
-        String expectedStatus = "zpjj2016";
-        frame.statusbar.setText(expectedStatus);
-        assertEquals(frame.statusbar.getText(), expectedStatus);
-    }
+//    Frame frame;
+//
+//    @Before
+//    public void setUp() {
+//        frame = new Frame();
+//    }
+//
+//    @Test
+//    public void checkStatusBarTest() {
+//        String expectedStatus = "zpjj2016";
+//        frame.statusbar.setText(expectedStatus);
+//        assertEquals(frame.statusbar.getText(), expectedStatus);
+//    }
 }

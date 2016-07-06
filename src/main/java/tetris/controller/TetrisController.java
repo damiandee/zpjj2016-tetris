@@ -88,7 +88,7 @@ public class TetrisController extends JPanel implements  ActionListener {
         timer.start();
     }
 
-    private void pause() {
+    public void pause() {
         if (!isStarted) {
             return;
         }
