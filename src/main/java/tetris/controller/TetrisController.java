@@ -6,6 +6,7 @@ import tetris.model.factory.BlockFactory;
 import tetris.model.factory.BlockType;
 import tetris.model.factory.TetrisBlockFactory;
 import tetris.view.*;
+import tetris.view.Frame;
 
 import javax.swing.*;
 import java.awt.*;
@@ -33,7 +34,7 @@ public class TetrisController extends JPanel implements  ActionListener {
     JLabel statusbar;
     Block curPiece;
     BlockType[] board;
-    Frame mainFrame;
+    tetris.view.Frame mainFrame;
 
     BlockFactory blockFactory = new TetrisBlockFactory();
 
