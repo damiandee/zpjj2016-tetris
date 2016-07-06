@@ -25,23 +25,12 @@ public class Frame extends JFrame implements ActionListener {
     public Frame() {
 
         statusbar = new JLabel(" 0");
-        add(statusbar, BorderLayout.SOUTH);
-        TetrisController tetrisController = new TetrisController(this);
         mainFrame = this;
         scoreFrame = this;
 
         JButton start = new JButton("START");
         startFrame.add(start);
 
-        login = new Button("Zaloguj");
-        login.setBounds(320, 10, 50, 30);
-        login.setVisible(false);
-        add(login);
-        login.addActionListener(this);
-
-        add(tetrisController);
-
-        tetrisController.start();
         add(startFrame);
         setSize(400, 600);
         setTitle("Tetris");
@@ -51,13 +40,13 @@ public class Frame extends JFrame implements ActionListener {
 
         start.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                Frame.this.tetrisController = new TetrisController(mainFrame);
+                tetrisController = new TetrisController(mainFrame);
 
-                Frame.this.tetrisController.add(statusbar, BorderLayout.SOUTH);
+                tetrisController.add(statusbar, BorderLayout.SOUTH);
 
-                add(Frame.this.tetrisController);
+                add(tetrisController);
                 startFrame.setVisible(false);
-                Frame.this.tetrisController.start();
+                tetrisController.start();
             }
         });
     }
@@ -76,7 +65,6 @@ public class Frame extends JFrame implements ActionListener {
 
     public void endGame() {
         String text = "game over";
-        // final Panel scores = new Panel(scoreFrame);
         if(statusbar.getText().equals(text)){
             score.setBounds(300, 10, 50, 30);
             score.setVisible(true);
@@ -94,8 +82,5 @@ public class Frame extends JFrame implements ActionListener {
 
         score.addActionListener(this);
         Score sc = new Score(this);
-        login.addActionListener(this);
-        Login lo = new Login();
-
     }
 }
