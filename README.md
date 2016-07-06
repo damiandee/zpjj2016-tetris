@@ -7,6 +7,17 @@ Tetris – gra logiczna, rozpoczynająca się na pustej, prostokątnej planszy, 
 
 Sterowanie odbywa się przy pomocy strzałek. Prawa i lewa odpowiadają kierunkom przesuwania klocka w prawo i w lewo. Strzałka w górę pozwala na obrót klocka. Dodatkowo klawisz spacji umożliwia szybkie przesunięcie klocka do dolnej krawędzi planszy.
 
+*Uruchomienie aplikacji*
+
+Przy pomocy IntelliJ IDEA Community Edition.
+
+1. Wybieramy "Edit Configurations...".
+2. Wybieramy "Add New Configuration".
+3. Spośród dostępnych konfiguracji wybieramy "Application".
+4. Wybieramy klasę Frame jako Main class oraz ustawiamy nazwę "Name" konfiguracji wedle uznania np. "Start".
+5. Klikamy w przycisk "Apply" następnie w przycisk "Ok".
+6. Klikamy w przycisk Run "Start" i uruchamiamy aplikację.
+
 *Dodatkowe funkcjonalności*
 
 System punktowy dla aktualnie rozgrywanej gry.
