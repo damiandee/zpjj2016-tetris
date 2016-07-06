@@ -9,6 +9,8 @@ import java.awt.event.ActionListener;
  */
 public class Login {
 
+    static String user;
+
     public static void placeComponents(final JPanel panel) {
 
         panel.setLayout(null);
@@ -33,6 +35,7 @@ public class Login {
                 panel.remove(loginButton);
                 panel.remove(userText);
                 panel.remove(userLabel);
+                user = userText.getText();
             }
         });
     }

@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import static tetris.view.Login.variable;
+import static tetris.view.Login.user;
 
 
 /**
@@ -27,7 +27,7 @@ public class Score extends JFrame implements ActionListener {
         setTitle("Wyniki");
         setLayout(new BorderLayout());
 
-        username = variable;
+        username = user;
         //username = "user1";
         sc = new JLabel("Wynik uzytkownika " + username);
         add(sc, BorderLayout.PAGE_START);
