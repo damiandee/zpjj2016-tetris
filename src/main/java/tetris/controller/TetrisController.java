@@ -9,7 +9,10 @@ import tetris.view.*;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.Random;
 
 /**
@@ -30,14 +33,17 @@ public class TetrisController extends JPanel implements  ActionListener {
     JLabel statusbar;
     Block curPiece;
     BlockType[] board;
+    Frame mainFrame;
 
     BlockFactory blockFactory = new TetrisBlockFactory();
 
     public TetrisController(tetris.view.Frame frame) {
 
+        this.mainFrame = frame;
         setFocusable(true);
         setRandomBlock();
         timer = new Timer(400, this);
+
         timer.start();
 
         statusbar = frame.getStatusBar();
@@ -178,6 +184,7 @@ public class TetrisController extends JPanel implements  ActionListener {
             timer.stop();
             isStarted = false;
             statusbar.setText("game over");
+            mainFrame.endGame();
         }
     }
 
@@ -253,6 +260,10 @@ public class TetrisController extends JPanel implements  ActionListener {
                 x + squareWidth() - 1, y + squareHeight() - 1);
         g.drawLine(x + squareWidth() - 1, y + squareHeight() - 1,
                 x + squareWidth() - 1, y + 1);
+    }
+
+    public int getPointsNumber() {
+        return numLinesRemoved;
     }
 
     class TAdapter extends KeyAdapter {
