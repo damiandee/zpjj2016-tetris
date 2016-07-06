@@ -11,7 +11,9 @@ Sterowanie odbywa się przy pomocy strzałek. Prawa i lewa odpowiadają kierunko
 
 System punktowy dla aktualnie rozgrywanej gry.
 
-Tabela wyników dla poszczególnych rozgrywek. 
+Logowanie użytkownika.
+
+Wyniki dla poszczególnych rozgrywek w danym dniu. 
 
 *Autorzy*
 
